@@ -1,0 +1,245 @@
+/* ニッポン政治勢力図 ― 古地図・彩色テーマ */
+:root {
+  --bg: #e9d8b4;
+  --paper: #efe0bf;
+  --ink: #3b2a1a;
+  --muted: #7a6141;
+  --line: #5a3e22;
+  --accent: #9e2a1f;
+  --ok: #4f7a34;
+  --ng: #9e2a1f;
+  --fill-op: .66;
+  --vignette: rgba(90, 62, 34, .35);
+  --font-h: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-b: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --tex: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .3  0 0 0 0 .12  0 0 0 .22 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1d1812;
+    --paper: #2a2219;
+    --ink: #efe2c4;
+    --muted: #b9a47e;
+    --line: #8a6c45;
+    --accent: #e0624f;
+    --ok: #9cc37a;
+    --ng: #e0624f;
+    --fill-op: .72;
+    --vignette: rgba(0, 0, 0, .55);
+    --tex: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4'/><feColorMatrix values='0 0 0 0 .9  0 0 0 0 .75  0 0 0 0 .5  0 0 0 .07 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 120px; }
+body {
+  margin: 0;
+  background: var(--bg) var(--tex);
+  color: var(--ink);
+  font-family: var(--font-b);
+  line-height: 1.65;
+}
+a { color: inherit; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- ヘッダー ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg) var(--tex);
+  border-bottom: 3px double var(--line);
+  padding: 12px 0 8px;
+}
+.site-header h1 { font-family: var(--font-h); font-weight: 900; margin: 0; font-size: 1.5rem; letter-spacing: .08em; line-height: 1.3; }
+.seal {
+  display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; margin-left: .35em;
+  background: var(--accent); color: #fff; font-size: .55em; border-radius: 3px;
+  vertical-align: middle; transform: rotate(-6deg);
+}
+.updated { margin: 0; color: var(--muted); font-size: .8rem; }
+.site-nav { display: flex; gap: 2px 14px; flex-wrap: wrap; margin-top: 4px; font-size: .85rem; }
+.site-nav a { color: var(--muted); text-decoration: none; }
+.site-nav a:hover { color: var(--accent); }
+@media (max-width: 600px) {
+  .site-header h1 { font-size: 1.2rem; }
+  .updated { display: none; }
+  .site-nav { gap: 0 10px; font-size: .78rem; }
+}
+
+main { padding: 20px 16px 40px; display: grid; gap: 20px; }
+
+/* ---------- パネル（古地図の紙） ---------- */
+.card {
+  background: var(--paper) var(--tex);
+  border: 2px solid var(--line);
+  box-shadow: inset 0 0 40px var(--vignette);
+  padding: 18px;
+  min-width: 0;
+}
+.card h2 {
+  font-family: var(--font-h); font-weight: 700; margin: 0 0 12px; font-size: 1.15rem; letter-spacing: .05em;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
+}
+.card h2 small { font-weight: 400; color: var(--muted); font-size: .78rem; letter-spacing: 0; }
+.note { color: var(--muted); font-size: .8rem; margin: 10px 0 0; }
+
+/* ---------- 主要指標 ---------- */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.kpi { border-left: 4px solid var(--accent); padding: 2px 12px; }
+.kpi .label { color: var(--muted); font-size: .78rem; }
+.kpi .value { font-family: var(--font-h); font-size: 1.65rem; font-weight: 900; font-variant-numeric: tabular-nums; line-height: 1.4; }
+.kpi .value small { font-size: .6em; }
+.kpi .sub { font-size: .8rem; color: var(--muted); }
+.stamp {
+  display: inline-block; border: 2px solid var(--accent); color: var(--accent);
+  font-family: var(--font-h); font-weight: 900; font-size: .78rem; padding: 0 6px;
+  border-radius: 3px; transform: rotate(-4deg);
+}
+.stamp.weak { opacity: .75; }
+
+/* ---------- 政権 ---------- */
+.gov { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; }
+.gov .pm { font-family: var(--font-h); font-size: 1.4rem; font-weight: 900; }
+dl.gov { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 8px 0 0; font-size: .9rem; }
+dl.gov dt { color: var(--muted); }
+dl.gov dd { margin: 0; }
+
+/* ---------- 全国の勢力図（都道府県） ---------- */
+.nation { display: grid; grid-template-columns: minmax(0, 3fr) minmax(240px, 2fr); gap: 16px; align-items: start; }
+@media (max-width: 760px) { .nation { grid-template-columns: 1fr; } }
+.japan { width: 100%; height: auto; display: block; }
+.japan .pref { stroke: var(--line); stroke-width: .5; cursor: pointer; transition: opacity .15s; }
+.japan .pref:hover, .japan .pref.sel { stroke: var(--ink); stroke-width: 1.6; }
+.japan .pref:focus { outline: none; stroke: var(--accent); stroke-width: 2; }
+.japan .frame { fill: none; stroke: var(--line); stroke-width: .8; stroke-dasharray: 4 3; }
+.japan .frame-label { font-size: 8px; fill: var(--muted); font-family: var(--font-b); }
+.japan .sea { font-family: var(--font-h); fill: var(--muted); opacity: .55; letter-spacing: .4em; }
+.japan.dim .pref:not(.hl) { opacity: .25; }
+.pref-detail { border: 1.5px solid var(--line); padding: 12px 14px; background: color-mix(in srgb, var(--paper) 80%, transparent); }
+.pref-detail h3 { margin: 0 0 4px; font-family: var(--font-h); font-size: 1.2rem; }
+.pref-detail .seats { font-size: .82rem; color: var(--muted); margin-bottom: 8px; }
+.pref-detail .warn { font-size: .78rem; color: var(--accent); margin-top: 8px; }
+.pref-detail .hint { color: var(--muted); font-size: .85rem; }
+.winbar { display: flex; height: 16px; border: 1px solid var(--line); margin: 6px 0 8px; }
+.winbar span { display: block; height: 100%; }
+.winlist { list-style: none; margin: 0; padding: 0; font-size: .9rem; }
+.winlist li { display: flex; align-items: center; gap: 8px; }
+.winlist .n { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+.nation-legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 4px; font-size: .85rem; }
+.nation-legend button {
+  all: unset; display: flex; align-items: center; gap: 8px; width: 100%; cursor: pointer; padding: 2px 4px;
+}
+.nation-legend button:hover, .nation-legend button[aria-pressed="true"] { background: color-mix(in srgb, var(--line) 15%, transparent); }
+.nation-legend button:focus-visible { outline: 2px solid var(--accent); }
+.nation-legend .n { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--muted); font-size: .8rem; }
+.sw { width: 14px; height: 14px; flex: none; border: 1px solid var(--line); }
+.sw.striped { background-image: repeating-linear-gradient(45deg, transparent 0 3px, rgba(255,255,255,.65) 3px 5px) !important; }
+
+/* ---------- 国会の勢力図（議席の領地） ---------- */
+.houses { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+.territory { width: 100%; height: auto; display: block; }
+.territory .terr { stroke: var(--line); stroke-width: 1.6; }
+.territory .label, .territory .num {
+  font-family: var(--font-h); font-weight: 900; fill: var(--ink);
+  paint-order: stroke; stroke: var(--paper); stroke-width: 4px; stroke-linejoin: round;
+}
+.territory .num { font-weight: 700; }
+.territory .mon { color: var(--ink); opacity: .8; }
+.territory .alliance { fill: none; stroke: var(--accent); stroke-width: 5; stroke-dasharray: 14 6; }
+.territory .tag { font-family: var(--font-h); font-weight: 900; fill: var(--accent); paint-order: stroke; stroke: var(--paper); stroke-width: 4px; }
+.thresholds { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+.legend { list-style: none; padding: 0; margin: 10px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 3px 12px; font-size: .85rem; }
+.legend li { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.legend .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.legend .n { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 700; }
+.legend li.ruling .nm { font-weight: 700; color: var(--accent); }
+
+/* ---------- 家紋風の印 ---------- */
+.mon-i { width: 18px; height: 18px; flex: none; }
+
+/* ---------- 政府の重点政策 ---------- */
+.agenda { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.agenda-item { border: 1.5px solid var(--line); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.agenda-item .meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: .75rem; color: var(--muted); }
+.agenda-item h3 { margin: 0; font-size: 1.02rem; font-family: var(--font-h); }
+.agenda-item p { margin: 0; font-size: .9rem; }
+.agenda-item ul { margin: 0; padding-left: 1.2em; font-size: .82rem; color: var(--muted); }
+.agenda-item .src { font-size: .75rem; color: var(--muted); margin-top: auto; }
+.status { display: inline-block; padding: 0 8px; font-size: .72rem; font-weight: 700; background: var(--accent); color: #fff; }
+.status.plan { background: var(--muted); }
+
+/* ---------- 争点 ---------- */
+.issue-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.issue-tabs button {
+  font: inherit; font-size: .85rem; padding: 4px 12px; border: 1.5px solid var(--line);
+  background: transparent; color: var(--ink); cursor: pointer;
+}
+.issue-tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+.issue-q { font-weight: 700; margin: 0 0 10px; font-family: var(--font-h); }
+
+.spectrum { margin: 4px 0 16px; padding: 12px; border: 1.5px dashed var(--line); }
+.spectrum .axis { height: 6px; background: linear-gradient(90deg, var(--muted), var(--muted)); opacity: .5; }
+.spectrum .ends { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); font-weight: 700; margin: 2px 0 8px; }
+.spectrum .groups { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 600px) { .spectrum .groups { grid-template-columns: 1fr; } }
+.spectrum h4 { margin: 0 0 6px; font-family: var(--font-h); font-size: .88rem; text-align: center; border-bottom: 1px solid var(--line); }
+.spectrum .flags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.spectrum .others { font-size: .78rem; color: var(--muted); text-align: center; margin-top: 10px; }
+.flag {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px 2px 4px; font-size: .82rem; font-weight: 700;
+  background: var(--paper); border: 1.5px solid var(--pc); border-left: 8px solid var(--pc);
+}
+
+.positions { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
+.positions li { display: grid; grid-template-columns: 5.6em 1fr; gap: 2px 10px; border: 1.5px solid var(--line); border-left: 8px solid var(--pc); padding: 8px 10px; }
+.positions .pn { font-weight: 700; font-size: .85rem; grid-row: span 2; display: flex; flex-direction: column; gap: 2px; }
+.positions .pn span { display: flex; align-items: center; gap: 4px; }
+.positions .pn small { font-weight: 400; color: var(--muted); font-size: .7rem; }
+.positions .ps { font-weight: 700; font-family: var(--font-h); }
+.positions .pd { font-size: .82rem; color: var(--muted); }
+.positions li.unknown .ps { color: var(--muted); font-weight: 400; }
+.matrix-wrap { margin-top: 14px; }
+.matrix-wrap summary { cursor: pointer; font-size: .9rem; color: var(--muted); }
+.matrix-scroll { overflow-x: auto; margin-top: 8px; }
+.matrix { border-collapse: collapse; font-size: .8rem; min-width: 640px; width: 100%; }
+.matrix th, .matrix td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+.matrix thead th { background: color-mix(in srgb, var(--line) 15%, transparent); }
+.matrix tbody th { white-space: nowrap; border-left: 6px solid var(--pc); }
+.matrix td.unknown { color: var(--muted); }
+
+/* ---------- 支持率・日程・閣僚 ---------- */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+.poll { display: grid; grid-template-columns: 9em 1fr; gap: 8px; align-items: center; margin-bottom: 10px; font-size: .9rem; }
+.poll .who small { display: block; color: var(--muted); font-size: .75rem; }
+.bar { display: flex; height: 22px; background: color-mix(in srgb, var(--line) 20%, transparent); font-size: .75rem; color: #fff; font-weight: 700; border: 1px solid var(--line); }
+.bar .a { background: var(--ok); display: flex; align-items: center; padding-left: 6px; }
+.bar .d { background: var(--ng); display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; margin-left: auto; }
+
+.timeline { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--line); }
+.timeline li { position: relative; padding: 0 0 12px 16px; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--line); }
+.timeline li.past::before { background: var(--muted); border-color: var(--muted); }
+.timeline li.next::before { background: var(--accent); border-color: var(--accent); }
+.timeline time { font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.timeline .t { font-weight: 700; }
+.timeline .d { font-size: .8rem; color: var(--muted); }
+.timeline li.past .t { color: var(--muted); font-weight: 400; }
+
+.cabinet { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+.cabinet li { border: 1.5px solid var(--line); padding: 6px 10px; }
+.cabinet .post { font-size: .75rem; color: var(--muted); }
+.cabinet .name { font-weight: 700; font-family: var(--font-h); }
+.cabinet .warn { font-size: .7rem; color: var(--accent); }
+
+.sources ul { margin: 0; padding-left: 1.2em; font-size: .85rem; }
+.site-footer { color: var(--muted); font-size: .8rem; padding: 20px 0; text-align: center; }
+.error { color: var(--accent); }
+@media (max-width: 600px) {
+  .kpis { grid-template-columns: 1fr 1fr; gap: 10px 6px; padding: 12px; }
+  .kpi { padding: 0 8px; }
+  .kpi .value { font-size: 1.25rem; }
+  .kpi .label { font-size: .7rem; }
+  .stamp { font-size: .65rem; }
+  .card { padding: 14px 12px; }
+}

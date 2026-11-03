@@ -1,0 +1,12 @@
+{
+  "name": "politics-app",
+  "version": "0.3.0",
+  "private": true,
+  "description": "日本の政治情勢が一目でわかる勢力図ダッシュボード",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node scripts/validate.mjs",
+    "screenshot": "node scripts/screenshot.cjs"
+  }
+}
