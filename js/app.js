@@ -1,4 +1,4 @@
-import { hemicycleSeats, orderFactions, rulingStatus, validate } from "./lib.js";
+import { hemicycleSeats, isUnknown, orderFactions, rulingStatus, seatsOf, validate, validatePolicies } from "./lib.js";
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) =>
@@ -127,12 +127,92 @@ function renderSources(list) {
     .join("");
 }
 
+const PLANNED = /予定|策定/;
+
+function renderAgenda(items) {
+  $("agenda").innerHTML = items
+    .map(
+      (a) => `<article class="agenda-item">
+        <div class="meta"><span class="status ${PLANNED.test(a.status) ? "plan" : ""}">${esc(a.status)}</span>${esc(a.area)}</div>
+        <h3>${esc(a.title)}</h3>
+        <p>${esc(a.summary)}</p>
+        ${a.points?.length ? `<ul>${a.points.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
+        <div class="src">出典：${a.sources.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join("、")}</div>
+      </article>`,
+    )
+    .join("");
+}
+
+function renderIssues(policies, parties, shugiin) {
+  const keys = policies.issueParties;
+  $("issues-note").textContent = policies.issuesNote;
+  const seatLabel = (k) => {
+    const n = seatsOf(shugiin, k);
+    return n ? `衆${n}` : "衆院会派なし";
+  };
+
+  const tabs = $("issue-tabs");
+  tabs.innerHTML = policies.issues
+    .map((it, i) => `<button role="tab" id="tab-${it.id}" aria-controls="issue-detail" aria-selected="${i === 0}" data-id="${it.id}">${esc(it.title)}</button>`)
+    .join("");
+
+  const show = (id) => {
+    const it = policies.issues.find((x) => x.id === id) ?? policies.issues[0];
+    tabs.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.id === it.id)));
+    $("issue-detail").setAttribute("aria-labelledby", `tab-${it.id}`);
+    $("issue-detail").innerHTML = `
+      <p class="issue-q">${esc(it.question)}</p>
+      <ul class="positions">${keys
+        .map((k) => {
+          const pos = it.positions[k];
+          const p = parties[k];
+          return `<li class="${isUnknown(pos) ? "unknown" : ""}" style="--pc:${p.color}">
+            <span class="pn" title="${esc(p.full ?? p.name)}">${esc(p.name)}<small>${seatLabel(k)}</small></span>
+            <span class="ps">${esc(pos?.short ?? "未確認")}</span>
+            <span class="pd">${esc(pos?.detail || "調べた資料では確認できませんでした")}</span></li>`;
+        })
+        .join("")}</ul>
+      <p class="note">出典：${it.sources.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join("、")}</p>`;
+  };
+  tabs.addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-id]");
+    if (b) show(b.dataset.id);
+  });
+  tabs.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const btns = [...tabs.querySelectorAll("button")];
+    const i = btns.indexOf(document.activeElement);
+    if (i < 0) return;
+    const next = btns[(i + (e.key === "ArrowRight" ? 1 : -1) + btns.length) % btns.length];
+    next.focus();
+    show(next.dataset.id);
+  });
+  show(policies.issues[0].id);
+
+  $("matrix").innerHTML = `
+    <thead><tr><th scope="col">政党</th>${policies.issues.map((it) => `<th scope="col">${esc(it.title)}</th>`).join("")}</tr></thead>
+    <tbody>${keys
+      .map((k) => {
+        const p = parties[k];
+        return `<tr><th scope="row" style="--pc:${p.color}" title="${esc(p.full ?? p.name)}">${esc(p.name)}</th>${policies.issues
+          .map((it) => {
+            const pos = it.positions[k];
+            return `<td class="${isUnknown(pos) ? "unknown" : ""}" title="${esc(pos?.detail ?? "")}">${esc(pos?.short ?? "未確認")}</td>`;
+          })
+          .join("")}</tr>`;
+      })
+      .join("")}</tbody>`;
+}
+
 async function main() {
   try {
-    const res = await fetch("data/politics.json", { cache: "no-cache" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const errors = validate(data);
+    const load = async (path) => {
+      const res = await fetch(path, { cache: "no-cache" });
+      if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
+      return res.json();
+    };
+    const [data, policies] = await Promise.all([load("data/politics.json"), load("data/policies.json")]);
+    const errors = [...validate(data), ...validatePolicies(policies, data.parties)];
     if (errors.length) console.warn("データ整合性エラー:", errors);
 
     $("updated").textContent = fmtDate(data.updatedAt);
@@ -141,6 +221,8 @@ async function main() {
     renderGovernment(data.government);
     const houses = $("houses");
     data.houses.forEach((h) => houses.appendChild(renderHouse(h, data.parties)));
+    renderAgenda(policies.agenda);
+    renderIssues(policies, data.parties, data.houses.find((h) => h.id === "shugiin"));
     renderPolls(data.polls);
     renderCalendar(data.calendar, new Date().toISOString().slice(0, 10));
     renderCabinet(data.cabinet);

@@ -100,3 +100,43 @@ main { padding: 20px 16px 40px; display: grid; gap: 20px; }
 
 .site-footer { color: var(--muted); font-size: .8rem; padding: 20px 0; text-align: center; }
 .error { color: var(--warn); }
+
+/* ---------- ナビ ---------- */
+.site-header { position: sticky; top: 0; z-index: 10; }
+.site-nav { display: flex; gap: 4px 14px; flex-wrap: wrap; margin-top: 6px; font-size: .85rem; }
+.site-nav a { color: var(--muted); text-decoration: none; }
+.site-nav a:hover { color: var(--accent); }
+[id] { scroll-margin-top: 110px; }
+
+/* ---------- 政府の重点政策 ---------- */
+.agenda { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.agenda-item { border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.agenda-item .meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: .75rem; color: var(--muted); }
+.agenda-item h3 { margin: 0; font-size: 1rem; }
+.agenda-item p { margin: 0; font-size: .9rem; }
+.agenda-item ul { margin: 0; padding-left: 1.2em; font-size: .82rem; color: var(--muted); }
+.agenda-item .src { font-size: .75rem; color: var(--muted); }
+.agenda-item .src a { color: inherit; }
+.status { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: .72rem; font-weight: 700; background: var(--accent); color: #fff; }
+.status.plan { background: var(--muted); }
+
+/* ---------- 争点 ---------- */
+.issue-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.issue-tabs button { font: inherit; font-size: .85rem; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; }
+.issue-tabs button[aria-selected="true"] { background: var(--text); color: var(--surface); border-color: var(--text); }
+.issue-q { font-weight: 600; margin: 0 0 10px; }
+.positions { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
+.positions li { display: grid; grid-template-columns: 5.5em 1fr; gap: 2px 10px; border: 1px solid var(--border); border-left: 5px solid var(--pc); border-radius: 8px; padding: 8px 10px; }
+.positions .pn { font-weight: 700; font-size: .85rem; grid-row: span 2; }
+.positions .pn small { display: block; font-weight: 400; color: var(--muted); font-size: .7rem; }
+.positions .ps { font-weight: 700; }
+.positions .pd { font-size: .82rem; color: var(--muted); }
+.positions li.unknown .ps { color: var(--muted); font-weight: 400; }
+.matrix-wrap { margin-top: 14px; }
+.matrix-wrap summary { cursor: pointer; font-size: .9rem; color: var(--muted); }
+.matrix-scroll { overflow-x: auto; margin-top: 8px; }
+.matrix { border-collapse: collapse; font-size: .8rem; min-width: 640px; width: 100%; }
+.matrix th, .matrix td { border: 1px solid var(--border); padding: 6px 8px; text-align: left; vertical-align: top; }
+.matrix thead th { background: var(--bg); position: sticky; top: 0; }
+.matrix tbody th { white-space: nowrap; border-left: 5px solid var(--pc); }
+.matrix td.unknown { color: var(--muted); }

@@ -70,3 +70,38 @@ export function orderFactions(factions) {
   const rank = (f) => (f.ruling ? 0 : f.party === "ind" ? 2 : f.party === "vacant" ? 3 : 1);
   return [...factions].sort((a, b) => rank(a) - rank(b) || b.seats - a.seats);
 }
+
+const UNKNOWN = new Set(["未確認", "記載なし"]);
+/** 立場が資料で確認できていない（未確認・記載なし）か */
+export const isUnknown = (pos) => !pos || UNKNOWN.has(pos.short);
+
+/** 政策データ（policies.json）の整合性チェック */
+export function validatePolicies(policies, parties) {
+  const errors = [];
+  const ids = new Set();
+  for (const a of policies.agenda) {
+    if (ids.has(a.id)) errors.push(`agenda: id "${a.id}" が重複しています`);
+    ids.add(a.id);
+    if (!a.sources?.length) errors.push(`agenda "${a.title}": 出典がありません`);
+  }
+  for (const k of policies.issueParties) {
+    if (!parties[k]) errors.push(`issueParties: 未定義の政党キー "${k}"`);
+  }
+  for (const issue of policies.issues) {
+    if (!issue.sources?.length) errors.push(`争点「${issue.title}」: 出典がありません`);
+    for (const k of policies.issueParties) {
+      const p = issue.positions[k];
+      if (!p) errors.push(`争点「${issue.title}」: ${k} の立場がありません（不明なら short を "未確認" に）`);
+      else if (!isUnknown(p) && !p.detail) errors.push(`争点「${issue.title}」: ${k} に detail がありません`);
+    }
+    for (const k of Object.keys(issue.positions)) {
+      if (!policies.issueParties.includes(k)) errors.push(`争点「${issue.title}」: issueParties にない政党キー "${k}"`);
+    }
+  }
+  return errors;
+}
+
+/** 衆議院で、ある政党キーの会派が持つ議席数 */
+export function seatsOf(house, partyKey) {
+  return house.factions.filter((f) => f.party === partyKey).reduce((s, f) => s + f.seats, 0);
+}

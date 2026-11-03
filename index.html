@@ -12,11 +12,18 @@
     <div class="wrap">
       <h1>ニッポン政治ダッシュボード</h1>
       <p class="updated">データ更新日：<time id="updated">—</time></p>
+      <nav class="site-nav" aria-label="ページ内">
+        <a href="#top">概要</a>
+        <a href="#houses">国会</a>
+        <a href="#h-agenda">政府の重点政策</a>
+        <a href="#h-issues">争点と各党</a>
+        <a href="#h-cal">日程・閣僚</a>
+      </nav>
     </div>
   </header>
 
   <main class="wrap">
-    <section class="kpis" id="kpis" aria-label="主要指標"></section>
+    <section class="kpis" id="kpis" aria-label="主要指標"><span id="top"></span></section>
 
     <section class="card" aria-labelledby="h-gov">
       <h2 id="h-gov">政権</h2>
@@ -24,6 +31,22 @@
     </section>
 
     <section class="houses" id="houses" aria-label="国会の勢力図"></section>
+
+    <section class="card" aria-labelledby="h-agenda">
+      <h2 id="h-agenda">政府の重点政策・国会の主な論点</h2>
+      <div class="agenda" id="agenda"></div>
+    </section>
+
+    <section class="card" aria-labelledby="h-issues">
+      <h2 id="h-issues">争点ごとの各党の立場</h2>
+      <p class="note" id="issues-note"></p>
+      <div class="issue-tabs" id="issue-tabs" role="tablist" aria-label="争点"></div>
+      <div id="issue-detail" role="tabpanel"></div>
+      <details class="matrix-wrap">
+        <summary>全争点の一覧表を見る</summary>
+        <div class="matrix-scroll"><table class="matrix" id="matrix"></table></div>
+      </details>
+    </section>
 
     <div class="grid-2">
       <section class="card" aria-labelledby="h-polls">
