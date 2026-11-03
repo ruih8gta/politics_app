@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ニッポン政治ダッシュボード</title>
-  <meta name="description" content="日本の政治情勢（内閣・国会の勢力図・内閣支持率・政治日程）を一目で把握できるダッシュボード">
+  <title>ニッポン政治勢力図</title>
+  <meta name="description" content="日本の政治情勢（全国の勢力図・国会の議席・政策・内閣支持率・政治日程）を古地図風の勢力図で一目で把握できるダッシュボード">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap">
-      <h1>ニッポン政治ダッシュボード</h1>
+      <h1>ニッポン政治勢力図<span class="seal" aria-hidden="true">政</span></h1>
       <p class="updated">データ更新日：<time id="updated">—</time></p>
       <nav class="site-nav" aria-label="ページ内">
-        <a href="#top">概要</a>
-        <a href="#houses">国会</a>
-        <a href="#h-agenda">政府の重点政策</a>
+        <a href="#kpis">概要</a>
+        <a href="#h-nation">全国地図</a>
+        <a href="#h-houses">国会</a>
+        <a href="#h-agenda">重点政策</a>
         <a href="#h-issues">争点と各党</a>
         <a href="#h-cal">日程・閣僚</a>
       </nav>
@@ -23,14 +27,28 @@
   </header>
 
   <main class="wrap">
-    <section class="kpis" id="kpis" aria-label="主要指標"><span id="top"></span></section>
+    <section class="card kpis" id="kpis" aria-label="主要指標"></section>
+
+    <section class="card" aria-labelledby="h-nation">
+      <h2 id="h-nation">全国の勢力図 <small id="nation-sub"></small></h2>
+      <div class="nation">
+        <div>
+          <svg class="japan" id="japan" role="img" aria-label="都道府県別の小選挙区の勢力図"></svg>
+        </div>
+        <div>
+          <div class="pref-detail" id="pref-detail" aria-live="polite"></div>
+          <ul class="nation-legend" id="nation-legend"></ul>
+        </div>
+      </div>
+      <p class="note" id="nation-note"></p>
+    </section>
+
+    <section class="houses" id="h-houses" aria-label="国会の勢力図"></section>
 
     <section class="card" aria-labelledby="h-gov">
       <h2 id="h-gov">政権</h2>
       <div id="government"></div>
     </section>
-
-    <section class="houses" id="houses" aria-label="国会の勢力図"></section>
 
     <section class="card" aria-labelledby="h-agenda">
       <h2 id="h-agenda">政府の重点政策・国会の主な論点</h2>
@@ -49,15 +67,15 @@
     </section>
 
     <div class="grid-2">
-      <section class="card" aria-labelledby="h-polls">
-        <h2 id="h-polls">内閣支持率（直近の世論調査）</h2>
-        <div id="polls"></div>
-        <p class="note">調査機関・手法により数値に差があります。</p>
-      </section>
-
       <section class="card" aria-labelledby="h-cal">
         <h2 id="h-cal">政治日程</h2>
         <ol class="timeline" id="calendar"></ol>
+      </section>
+
+      <section class="card" aria-labelledby="h-polls">
+        <h2 id="h-polls">内閣支持率 <small>直近の世論調査</small></h2>
+        <div id="polls"></div>
+        <p class="note">調査機関・手法により数値に差があります。</p>
       </section>
     </div>
 
@@ -69,11 +87,11 @@
     <section class="card sources" aria-labelledby="h-src">
       <h2 id="h-src">出典</h2>
       <ul id="sources"></ul>
-      <p class="note">本サイトのデータは手動で更新しています。最新・正確な情報は各出典をご確認ください。</p>
+      <p class="note">本サイトのデータは手動で更新しています。最新・正確な情報は各出典をご確認ください。政党の印は本サイト独自の図案で、各党の公式ロゴではありません。</p>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="wrap">politics_app</div></footer>
+  <footer class="site-footer"><div class="wrap">ニッポン政治勢力図</div></footer>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

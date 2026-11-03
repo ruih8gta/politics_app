@@ -10,23 +10,24 @@
     "note": "2025年10月に自民・維新が連立合意。2026年2月の衆院選を経て第2次高市内閣が発足（2026-02-18）、9月17日に内閣改造。"
   },
   "parties": {
-    "ldp":     { "name": "自民", "full": "自由民主党",       "color": "#2e7d32" },
-    "chudo":   { "name": "中道", "full": "中道改革連合",       "color": "#1e88e5" },
-    "cdp":     { "name": "立憲", "full": "立憲民主党",       "color": "#1565c0" },
-    "ishin":   { "name": "維新", "full": "日本維新の会",       "color": "#8bc34a" },
-    "dpfp":    { "name": "国民", "full": "国民民主党",       "color": "#f9a825" },
-    "komeito": { "name": "公明", "full": "公明党",       "color": "#ec407a" },
-    "sanseito":{ "name": "参政", "full": "参政党",       "color": "#ef6c00" },
-    "mirai":   { "name": "みらい", "full": "チームみらい",     "color": "#00acc1" },
-    "jcp":     { "name": "共産", "full": "日本共産党",       "color": "#c62828" },
-    "reiwa":   { "name": "れいわ", "full": "れいわ新選組",     "color": "#ad1457" },
-    "inochi":  { "name": "いのち", "full": "いのちの党",     "color": "#8d6e63" },
-    "hoshu":   { "name": "保守", "full": "日本保守党",       "color": "#5e35b1" },
-    "okinawa": { "name": "沖縄の風", "full": "沖縄の風",   "color": "#26a69a" },
-    "sdp":     { "name": "社民", "full": "社会民主党",       "color": "#00897b" },
-    "shishi":  { "name": "志士", "full": "志士の会",       "color": "#6d4c41" },
-    "ind":     { "name": "無所属", "full": "無所属",     "color": "#9e9e9e" },
-    "vacant":  { "name": "欠員", "full": "欠員",       "color": "#e0e0e0" }
+    "ldp":     { "name": "自民", "full": "自由民主党",       "color": "#5a8a3c" },
+    "chudo":   { "name": "中道", "full": "中道改革連合",       "color": "#4878a8" },
+    "cdp":     { "name": "立憲", "full": "立憲民主党",       "color": "#3a62a0" },
+    "ishin":   { "name": "維新", "full": "日本維新の会",       "color": "#a8b440" },
+    "dpfp":    { "name": "国民", "full": "国民民主党",       "color": "#e0aa30" },
+    "komeito": { "name": "公明", "full": "公明党",       "color": "#c86a8a" },
+    "sanseito":{ "name": "参政", "full": "参政党",       "color": "#d8742e" },
+    "mirai":   { "name": "みらい", "full": "チームみらい",     "color": "#4aa0a8" },
+    "jcp":     { "name": "共産", "full": "日本共産党",       "color": "#b83a32" },
+    "reiwa":   { "name": "れいわ", "full": "れいわ新選組",     "color": "#a04070" },
+    "genyu":   { "name": "減ゆ", "full": "減税日本・ゆうこく連合", "color": "#b08a3a" },
+    "inochi":  { "name": "いのち", "full": "いのちの党",     "color": "#9a7a5a" },
+    "hoshu":   { "name": "保守", "full": "日本保守党",       "color": "#6a58a0" },
+    "okinawa": { "name": "沖縄の風", "full": "沖縄の風",   "color": "#3aa08a" },
+    "sdp":     { "name": "社民", "full": "社会民主党",       "color": "#2a8a78" },
+    "shishi":  { "name": "志士", "full": "志士の会",       "color": "#7a5a40" },
+    "ind":     { "name": "無所属", "full": "無所属",     "color": "#a89a80" },
+    "vacant":  { "name": "欠員", "full": "欠員",       "color": "#d8c8a0" }
   },
   "houses": [
     {
@@ -112,6 +113,7 @@
     { "label": "参議院 会派別所属議員数", "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/222/giinsu.htm" },
     { "label": "首相官邸 第2次高市改造内閣 閣僚等名簿", "url": "https://www.kantei.go.jp/jp/105/meibo/index.html" },
     { "label": "時事通信 内閣支持率の推移", "url": "https://www.jiji.com/jc/tokushu?id=naikaku_shijiritsu&g=pol" },
-    { "label": "NHK 世論調査", "url": "https://news.web.nhk/newsweb/na/nd-20261013de58348" }
+    { "label": "NHK 世論調査", "url": "https://news.web.nhk/newsweb/na/nd-20261013de58348" },
+    { "label": "地図データ：jpn-atlas（BSD-3-Clause）／国土地理院「地球地図日本」", "url": "https://www.gsi.go.jp/kankyochiri/gm_jpn.html" }
   ]
 }
