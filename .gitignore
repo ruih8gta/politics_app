@@ -3,3 +3,4 @@ node_modules/
 # 地図データ生成時に展開する元データ
 package/
 jpn-atlas-*.tgz
+__pycache__/
