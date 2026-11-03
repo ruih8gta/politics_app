@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ニッポン政治ダッシュボード</title>
+  <meta name="description" content="日本の政治情勢（内閣・国会の勢力図・内閣支持率・政治日程）を一目で把握できるダッシュボード">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>ニッポン政治ダッシュボード</h1>
+      <p class="updated">データ更新日：<time id="updated">—</time></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="kpis" id="kpis" aria-label="主要指標"></section>
+
+    <section class="card" aria-labelledby="h-gov">
+      <h2 id="h-gov">政権</h2>
+      <div id="government"></div>
+    </section>
+
+    <section class="houses" id="houses" aria-label="国会の勢力図"></section>
+
+    <div class="grid-2">
+      <section class="card" aria-labelledby="h-polls">
+        <h2 id="h-polls">内閣支持率（直近の世論調査）</h2>
+        <div id="polls"></div>
+        <p class="note">調査機関・手法により数値に差があります。</p>
+      </section>
+
+      <section class="card" aria-labelledby="h-cal">
+        <h2 id="h-cal">政治日程</h2>
+        <ol class="timeline" id="calendar"></ol>
+      </section>
+    </div>
+
+    <section class="card" aria-labelledby="h-cab">
+      <h2 id="h-cab">主要閣僚</h2>
+      <ul class="cabinet" id="cabinet"></ul>
+    </section>
+
+    <section class="card sources" aria-labelledby="h-src">
+      <h2 id="h-src">出典</h2>
+      <ul id="sources"></ul>
+      <p class="note">本サイトのデータは手動で更新しています。最新・正確な情報は各出典をご確認ください。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="wrap">politics_app</div></footer>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
