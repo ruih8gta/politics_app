@@ -1,0 +1,9 @@
+export const REPO='https://github.com/ruih8gta/politics_app/blob/3005fc5c9b30ebb922bd8c29c22ed019463d3e2d';
+export const canonical={chudo:'center',sanseito:'sansei',komeito:'komei'};
+export const electionGroups={ldp:'自民',chudo:'中道',ishin:'維新',dpfp:'国民',sanseito:'参政',mirai:'みらい',jcp:'共産',reiwa:'れいわ',genyu:'減ゆ',hoshu:'保守',sdp:'社民',ind:'無所属'};
+export function electionMembers(election,id=0){return election.prefectures.filter(p=>!id||Number(p.code)===Number(id)).flatMap(p=>Object.entries(p.winners).flatMap(([key,n])=>Array.from({length:n},()=>({group:electionGroups[key]||key,pref:Number(p.code)}))));}
+export function houseForDiagram(data,h){const c=data.counts[h],partyByGroup={'自民':'ldp','維新':'ishin','中道':'center','国民':'dpfp','民主':'dpfp','参政':'sansei','みらい':'mirai','みら':'mirai','共産':'jcp','立憲':'cdp','公明':'komei','い党':'inochi','保守':'hoshu','社民':'sdp','志士':'shishi','沖縄':'okinawa','無所属':'ind'};return {id:h,name:h==='lower'?'衆議院':'参議院',total:c.capacity,majority:Math.floor(c.capacity/2)+1,supermajority:Math.ceil(c.capacity*2/3),asOf:c.asOf,source:c.source,factions:[...c.groups.map(g=>({party:partyByGroup[g.short]||g.short,label:g.name,short:g.short,seats:g.count,ruling:['自民','維新'].includes(g.short)})),{party:'vacant',label:'欠員',short:'欠員',seats:c.capacity-c.total}]};}
+export function latestPolls(polls){const byAgency=new Map();for(const p of polls){const old=byAgency.get(p.pollster);if(!old||p.date>old.date)byAgency.set(p.pollster,p);}return [...byAgency.values()].sort((a,b)=>b.date.localeCompare(a.date));}
+export function pollSummary(polls){const rows=latestPolls(polls),dates=rows.map(x=>x.date).sort();return {rows,average:rows.length?rows.reduce((a,b)=>a+b.approve,0)/rows.length:null,from:dates[0],to:dates.at(-1)};}
+export function agendaKind(a){return /予定|策定/.test(a.status)?'planned':/審議/.test(a.status)?'debate':'agreement';}
+export function isUpcoming(item,today){return item.date>=today.slice(0,item.date.length);}

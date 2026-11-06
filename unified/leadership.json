@@ -1,0 +1,165 @@
+{
+  "checkedAt": "2026-11-04",
+  "parties": [
+    {
+      "id": "ldp",
+      "leaders": [{ "name": "高市 早苗", "role": "総裁" }],
+      "source": "https://www.jimin.jp/news/information/214208.html",
+      "sourceTitle": "政策実現、統一地方選必勝へ結束の布陣 新たな党役員人事｜自由民主党",
+      "asOf": "2026-09-16",
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "center",
+      "leaders": [{ "name": "小川 淳也", "role": "代表" }],
+      "source": "https://craj.jp/party/officers",
+      "sourceTitle": "役員一覧｜中道改革連合",
+      "asOf": "2026-08-19",
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "ishin",
+      "leaders": [
+        { "name": "吉村 洋文", "role": "代表" },
+        { "name": "藤田 文武", "role": "共同代表" }
+      ],
+      "source": "https://o-ishin.jp/member/directorate/",
+      "sourceTitle": "役員｜日本維新の会",
+      "asOf": null,
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "dpfp",
+      "leaders": [{ "name": "玉木 雄一郎", "role": "代表" }],
+      "source": "https://new-kokumin.jp/about/board-member",
+      "sourceTitle": "党役員｜国民民主党",
+      "asOf": "2026-10-01",
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "sansei",
+      "leaders": [{ "name": "神谷 宗幣", "role": "代表・事務局長" }],
+      "source": "https://www.sangiin.go.jp/japanese/joho1/kousei/giin/profile/7022014.htm",
+      "sourceTitle": "神谷 宗幣 議員情報｜参議院",
+      "asOf": "2025-12-18",
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "mirai",
+      "leaders": [{ "name": "安野 貴博", "role": "党首" }],
+      "source": "https://team-mir.ai/about",
+      "sourceTitle": "チームみらいについて｜チームみらい",
+      "asOf": null,
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "jcp",
+      "leaders": [{ "name": "田村 智子", "role": "幹部会委員長" }],
+      "source": "https://www.jcp.or.jp/web_senkyo/2542/",
+      "sourceTitle": "田村智子｜日本共産党",
+      "asOf": null,
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "cdp",
+      "leaders": [{ "name": "水岡 俊一", "role": "代表" }],
+      "source": "https://cdp-japan.jp/about/officers",
+      "sourceTitle": "立憲民主党 役員一覧",
+      "asOf": "2026-10-28",
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "komei",
+      "leaders": [{ "name": "岡本 三成", "role": "代表" }],
+      "source": "https://www.komei.or.jp/about/board/jonin_yakuinkai/",
+      "sourceTitle": "常任役員会｜公明党",
+      "asOf": null,
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "inochi",
+      "leaders": [
+        { "name": "山本 ジョージ", "role": "代表" },
+        { "name": "天畠 大輔", "role": "共同代表" }
+      ],
+      "source": "https://inochinoto.jp/member/",
+      "sourceTitle": "いのちの党 所属構成員",
+      "asOf": null,
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "hoshu",
+      "leaders": [{ "name": "百田 尚樹", "role": "代表" }],
+      "source": "https://hoshuto.jp/member/",
+      "sourceTitle": "メンバー｜日本保守党",
+      "asOf": null,
+      "portraitUrl": null,
+      "portraitSource": null
+    },
+    {
+      "id": "sdp",
+      "leaders": [{ "name": "福島 みずほ", "role": "党首" }],
+      "source": "https://sdp.or.jp/member/",
+      "sourceTitle": "国会議員情報など｜社会民主党",
+      "asOf": null,
+      "portraitUrl": null,
+      "portraitSource": null
+    }
+  ],
+  "relationships": [
+    {
+      "id": "ldp-ishin-coalition",
+      "from": "ldp",
+      "to": "ishin",
+      "type": "coalition",
+      "label": "連立政権",
+      "summary": "自民・維新による連立政権。2026年9月の内閣改造では、維新から中司宏氏が閣僚に就任。",
+      "source": "https://www.jimin.jp/news/press/214222.html",
+      "sourceTitle": "第2次高市改造内閣発足にあたって高市内閣総理大臣記者会見｜自由民主党",
+      "asOf": "2026-09-18"
+    },
+    {
+      "id": "center-cdp-joint-policy-teams",
+      "from": "center",
+      "to": "cdp",
+      "type": "cooperation",
+      "label": "三党合同PT",
+      "summary": "中道・立憲・公明の三党による政策協力。給付付き税額控除、選択的夫婦別姓などの合同PTを設置。",
+      "source": "https://craj.jp/party/officers",
+      "sourceTitle": "中道・立憲・公明 三党合同PT一覧｜中道改革連合",
+      "asOf": "2026-08-19"
+    },
+    {
+      "id": "center-komei-joint-policy-teams",
+      "from": "center",
+      "to": "komei",
+      "type": "cooperation",
+      "label": "三党合同PT",
+      "summary": "中道・立憲・公明の三党による政策協力。給付付き税額控除、選択的夫婦別姓などの合同PTを設置。",
+      "source": "https://craj.jp/party/officers",
+      "sourceTitle": "中道・立憲・公明 三党合同PT一覧｜中道改革連合",
+      "asOf": "2026-08-19"
+    },
+    {
+      "id": "cdp-komei-joint-policy-teams",
+      "from": "cdp",
+      "to": "komei",
+      "type": "cooperation",
+      "label": "三党合同PT",
+      "summary": "中道・立憲・公明の三党による政策協力。多文化共生、男女共同参画などの合同PTを設置。",
+      "source": "https://craj.jp/party/officers",
+      "sourceTitle": "中道・立憲・公明 三党合同PT一覧｜中道改革連合",
+      "asOf": "2026-08-19"
+    }
+  ]
+}

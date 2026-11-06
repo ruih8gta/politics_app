@@ -1,0 +1,450 @@
+{
+ "election": "第51回衆議院議員総選挙（2026年2月8日）小選挙区",
+ "totals": {
+  "ldp": 249,
+  "ishin": 20,
+  "dpfp": 8,
+  "chudo": 7,
+  "genyu": 1,
+  "ind": 4
+ },
+ "note": "各都道府県の小選挙区で、いちばん多く議席を取った政党の色で塗っています。比例代表の議席は含みません。無所属には当選後に会派に加わった議員も含みます。",
+ "sources": [
+  {
+   "label": "時事: 自民303議席、31都県独占",
+   "url": "https://www.jiji.com/jc/article?k=2026020800805&g=pol"
+  },
+  {
+   "label": "Wikipedia: 第51回衆議院議員総選挙",
+   "url": "https://ja.wikipedia.org/wiki/%E7%AC%AC51%E5%9B%9E%E8%A1%86%E8%AD%B0%E9%99%A2%E8%AD%B0%E5%93%A1%E7%B7%8F%E9%81%B8%E6%8C%99"
+  },
+  {
+   "label": "日経: 維新、大阪で9年ぶり小選挙区落とす",
+   "url": "https://www.nikkei.com/article/DGXZQOUF064FO0W6A200C2000000/"
+  },
+  {
+   "label": "サンテレビ: 兵庫12選挙区は自民と維新が独占",
+   "url": "https://www.sun-tv.co.jp/suntvnews/news/2026/02/09/92556/"
+  },
+  {
+   "label": "名古屋テレビ: 愛知1区で河村たかし氏当選",
+   "url": "https://www.nagoyatv.com/news/?id=034159"
+  },
+  {
+   "label": "時事: 長崎選挙区 開票結果",
+   "url": "https://www.jiji.com/jc/2026syu?l=senkyoku_42"
+  },
+  {
+   "label": "わかやま新報: 世耕さん大差で再選",
+   "url": "https://wakayamashimpo.co.jp/2026/02/20260210_136245.html"
+  },
+  {
+   "label": "時事: 鹿児島選挙区 開票結果",
+   "url": "https://www.jiji.com/jc/2026syu?l=senkyoku_46"
+  }
+ ],
+ "prefectures": [
+  {
+   "code": "01",
+   "name": "北海道",
+   "seats": 12,
+   "winners": {
+    "ldp": 11,
+    "chudo": 1
+   }
+  },
+  {
+   "code": "02",
+   "name": "青森",
+   "seats": 3,
+   "winners": {
+    "ldp": 3
+   }
+  },
+  {
+   "code": "03",
+   "name": "岩手",
+   "seats": 3,
+   "winners": {
+    "ldp": 2,
+    "chudo": 1
+   }
+  },
+  {
+   "code": "04",
+   "name": "宮城",
+   "seats": 5,
+   "winners": {
+    "ldp": 5
+   }
+  },
+  {
+   "code": "05",
+   "name": "秋田",
+   "seats": 3,
+   "winners": {
+    "ldp": 2,
+    "dpfp": 1
+   }
+  },
+  {
+   "code": "06",
+   "name": "山形",
+   "seats": 3,
+   "winners": {
+    "ldp": 3
+   }
+  },
+  {
+   "code": "07",
+   "name": "福島",
+   "seats": 4,
+   "winners": {
+    "ldp": 4
+   }
+  },
+  {
+   "code": "08",
+   "name": "茨城",
+   "seats": 7,
+   "winners": {
+    "ldp": 5,
+    "dpfp": 1,
+    "ind": 1
+   }
+  },
+  {
+   "code": "09",
+   "name": "栃木",
+   "seats": 5,
+   "winners": {
+    "ldp": 4,
+    "ind": 1
+   }
+  },
+  {
+   "code": "10",
+   "name": "群馬",
+   "seats": 5,
+   "winners": {
+    "ldp": 5
+   }
+  },
+  {
+   "code": "11",
+   "name": "埼玉",
+   "seats": 16,
+   "winners": {
+    "ldp": 16
+   }
+  },
+  {
+   "code": "12",
+   "name": "千葉",
+   "seats": 14,
+   "winners": {
+    "ldp": 13,
+    "chudo": 1
+   }
+  },
+  {
+   "code": "13",
+   "name": "東京",
+   "seats": 30,
+   "winners": {
+    "ldp": 30
+   }
+  },
+  {
+   "code": "14",
+   "name": "神奈川",
+   "seats": 20,
+   "winners": {
+    "ldp": 20
+   }
+  },
+  {
+   "code": "15",
+   "name": "新潟",
+   "seats": 5,
+   "winners": {
+    "ldp": 5
+   }
+  },
+  {
+   "code": "16",
+   "name": "富山",
+   "seats": 3,
+   "winners": {
+    "ldp": 3
+   }
+  },
+  {
+   "code": "17",
+   "name": "石川",
+   "seats": 3,
+   "winners": {
+    "ldp": 3
+   }
+  },
+  {
+   "code": "18",
+   "name": "福井",
+   "seats": 2,
+   "winners": {
+    "ldp": 2
+   }
+  },
+  {
+   "code": "19",
+   "name": "山梨",
+   "seats": 2,
+   "winners": {
+    "ldp": 2
+   }
+  },
+  {
+   "code": "20",
+   "name": "長野",
+   "seats": 5,
+   "winners": {
+    "ldp": 5
+   }
+  },
+  {
+   "code": "21",
+   "name": "岐阜",
+   "seats": 5,
+   "winners": {
+    "ldp": 5
+   }
+  },
+  {
+   "code": "22",
+   "name": "静岡",
+   "seats": 8,
+   "winners": {
+    "ldp": 8
+   }
+  },
+  {
+   "code": "23",
+   "name": "愛知",
+   "seats": 16,
+   "winners": {
+    "ldp": 12,
+    "dpfp": 3,
+    "genyu": 1
+   },
+   "note": "1区は減税日本・ゆうこく連合の河村たかし氏"
+  },
+  {
+   "code": "24",
+   "name": "三重",
+   "seats": 4,
+   "winners": {
+    "ldp": 4
+   }
+  },
+  {
+   "code": "25",
+   "name": "滋賀",
+   "seats": 3,
+   "winners": {
+    "ldp": 3
+   }
+  },
+  {
+   "code": "26",
+   "name": "京都",
+   "seats": 6,
+   "winners": {
+    "ldp": 4,
+    "ishin": 1,
+    "chudo": 1
+   }
+  },
+  {
+   "code": "27",
+   "name": "大阪",
+   "seats": 19,
+   "winners": {
+    "ishin": 18,
+    "ldp": 1
+   }
+  },
+  {
+   "code": "28",
+   "name": "兵庫",
+   "seats": 12,
+   "winners": {
+    "ldp": 11,
+    "ishin": 1
+   },
+   "note": "報道では自民と維新で12議席を独占。内訳は全国の維新の小選挙区20議席との突き合わせによる"
+  },
+  {
+   "code": "29",
+   "name": "奈良",
+   "seats": 3,
+   "winners": {
+    "ldp": 3
+   }
+  },
+  {
+   "code": "30",
+   "name": "和歌山",
+   "seats": 2,
+   "winners": {
+    "ldp": 1,
+    "ind": 1
+   },
+   "note": "2区は無所属の世耕弘成氏（自民は擁立せず支持）"
+  },
+  {
+   "code": "31",
+   "name": "鳥取",
+   "seats": 2,
+   "winners": {
+    "ldp": 2
+   }
+  },
+  {
+   "code": "32",
+   "name": "島根",
+   "seats": 2,
+   "winners": {
+    "ldp": 2
+   }
+  },
+  {
+   "code": "33",
+   "name": "岡山",
+   "seats": 4,
+   "winners": {
+    "ldp": 4
+   }
+  },
+  {
+   "code": "34",
+   "name": "広島",
+   "seats": 6,
+   "winners": {
+    "ldp": 6
+   }
+  },
+  {
+   "code": "35",
+   "name": "山口",
+   "seats": 3,
+   "winners": {
+    "ldp": 3
+   }
+  },
+  {
+   "code": "36",
+   "name": "徳島",
+   "seats": 2,
+   "winners": {
+    "ldp": 2
+   }
+  },
+  {
+   "code": "37",
+   "name": "香川",
+   "seats": 3,
+   "winners": {
+    "ldp": 1,
+    "dpfp": 1,
+    "chudo": 1
+   }
+  },
+  {
+   "code": "38",
+   "name": "愛媛",
+   "seats": 3,
+   "winners": {
+    "ldp": 3
+   }
+  },
+  {
+   "code": "39",
+   "name": "高知",
+   "seats": 2,
+   "winners": {
+    "ldp": 2
+   }
+  },
+  {
+   "code": "40",
+   "name": "福岡",
+   "seats": 11,
+   "winners": {
+    "ldp": 10,
+    "ind": 1
+   },
+   "note": "自民の当選者のうち確認できたのは1・2・3・11区。残りは全国の党派別議席数との突き合わせによる推定（その他1は未確認）",
+   "uncertain": true
+  },
+  {
+   "code": "41",
+   "name": "佐賀",
+   "seats": 2,
+   "winners": {
+    "ldp": 2
+   }
+  },
+  {
+   "code": "42",
+   "name": "長崎",
+   "seats": 3,
+   "winners": {
+    "ldp": 2,
+    "dpfp": 1
+   }
+  },
+  {
+   "code": "43",
+   "name": "熊本",
+   "seats": 4,
+   "winners": {
+    "ldp": 4
+   }
+  },
+  {
+   "code": "44",
+   "name": "大分",
+   "seats": 3,
+   "winners": {
+    "ldp": 3
+   }
+  },
+  {
+   "code": "45",
+   "name": "宮崎",
+   "seats": 3,
+   "winners": {
+    "ldp": 1,
+    "dpfp": 1,
+    "chudo": 1
+   }
+  },
+  {
+   "code": "46",
+   "name": "鹿児島",
+   "seats": 4,
+   "winners": {
+    "ldp": 3,
+    "chudo": 1
+   }
+  },
+  {
+   "code": "47",
+   "name": "沖縄",
+   "seats": 4,
+   "winners": {
+    "ldp": 4
+   }
+  }
+ ]
+}

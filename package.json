@@ -6,7 +6,16 @@
   "type": "module",
   "scripts": {
     "start": "python3 -m http.server 8000",
-    "test": "node scripts/validate.mjs",
-    "screenshot": "node scripts/screenshot.cjs"
+    "test": "npm run test:legacy && npm run test:unified",
+    "screenshot": "node scripts/screenshot.cjs",
+    "test:legacy": "node scripts/validate.mjs",
+    "test:unified": "node --check unified/app.js && node --check unified/model.js && node --check unified/unified.js && node --check unified/integration-model.js && node --check unified/page-guide.js && node --check unified/guide-content.js && node scripts/verify-unified.mjs",
+    "start:unified": "python3 -m http.server 8000 --directory unified"
+  },
+  "devDependencies": {
+    "linkedom": "0.18.15"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

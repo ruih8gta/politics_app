@@ -6,6 +6,28 @@
 |---|---|
 | <img src="docs/screenshots/desktop.png" alt="PC表示の全体" width="520"> | <img src="docs/screenshots/mobile.png" alt="スマホ表示（先頭部分）" width="260"> |
 
+## 統合デモ
+
+従来の1ページ版に加え、国会マップ・アトラス版を組み合わせた[統合デモ](unified/README.md)を `unified/` に追加しています。概要、全国マップ、政策・争点、議員検索、リーダー・内閣、政治日程の6画面を移動できます。各ページには控えめな「政治の基礎知識」ボタンがあり、国会・選挙・法律・予算などの仕組みを短い文章と図で学べます。以下の画面写真・説明は従来版のものです。
+
+```bash
+npm start
+# 従来版：http://localhost:8000/
+# 統合版：http://localhost:8000/unified/
+```
+
+統合版だけを配信する場合は `npm run start:unified` を使用してください。ビルドは不要です。
+
+検証には Node.js 22以降を使用します。本番表示にnpm依存パッケージは不要ですが、DOM動作テストには開発用のlinkedomを使います。
+
+```bash
+npm ci
+npm test             # 従来版と統合版の両方
+npm run test:unified  # 統合版のデータ・構文・DOM動作
+```
+
+資料は各画面に示した時点のスナップショットで、自動更新ではありません。統合版の資料由来・確認範囲は[専用README](unified/README.md)を参照してください。
+
 ## 画面の説明
 
 ### 1. 主要指標
