@@ -213,3 +213,30 @@ table th, table td { border-color: var(--line) !important; }
 .faction-row-name small, .faction-count small, .sidebar-foot, .leader-source, .detail-stat-note, .detail-note { color: var(--muted); }
 .relation-node text { font-family: var(--serif); }
 .toast { background: var(--ink); color: var(--paper); border-radius: 0; }
+
+/* ---------- スマホ：地図を画面幅に収め、地域カードは地図の下に ---------- */
+@media (max-width: 760px) {
+  .map-stage { height: auto; overflow: visible; }
+  .map-stage > svg { height: auto; aspect-ratio: 800 / 750; max-height: none; }
+  .region-card { position: static; width: auto; margin: 0 12px 12px; }
+}
+
+.map-explainer #overview-map-legend { flex-direction: column; gap: 3px; }
+.map-explainer .legend-title { font-size: 10px; color: var(--muted); }
+.map-explainer .legend-item b { font-weight: 900; margin-left: 2px; }
+
+/* ---------- スマホ：ナビの続きがあることを示す ---------- */
+@media (max-width: 760px) {
+  .app-nav {
+    -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 36px), transparent);
+    mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 36px), transparent);
+    padding-right: 40px;
+  }
+}
+
+/* ---------- リーダーの印 ---------- */
+.leader-monogram, [data-theme=dark] .leader-monogram {
+  background: var(--paper); border: 2px solid var(--party); color: var(--party);
+}
+.leader-monogram svg { width: 62%; height: 62%; }
+.leader-monogram svg path { fill: none; stroke: var(--party); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
