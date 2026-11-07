@@ -44,7 +44,7 @@ console.log('PASS: 711 members, all caucus totals, exact diagram areas, 289 elec
  click('[data-route="leaders"]');assert.equal($$('.leader-card').length,12);assert.equal($$('.cabinet-card').length,15);assert.match($('.cabinet-card.uncertain').textContent,/要確認/);click('#cabinet-sources');assert.match($('#dialog-content').textContent,/内閣/);close();
  click('[data-route="calendar"]');click('[data-calendar-filter="all"]');assert.equal($$('.calendar-event').length,snapshot.calendar.length);assert.ok($$('.calendar-event time').some(t=>t.dateTime==='2027-01'||t.getAttribute('datetime')==='2027-01'));click('#calendar-sources');assert.match($('#dialog-content').textContent,/個別出典URL/);close();
  click('#theme-toggle');assert.equal(document.documentElement.dataset.theme,'dark');click('#theme-toggle');assert.equal(document.documentElement.dataset.theme,'light');
- click('[data-open="sources"]');assert.match($('#dialog-content').textContent,/3005fc5/);assert.match($('#dialog-content').textContent,/福岡/);assert.match($('#dialog-content').textContent,/統合版は独立したディレクトリ/);close();
+ click('[data-open="sources"]');assert.match($('#dialog-content').textContent,/収録日2026.11.03/);assert.match($('#dialog-content').textContent,/福岡/);assert.match($('#dialog-content').textContent,/GitHubのリポジトリ/);close();
  location.hash='#overview';window.dispatchEvent(new window.Event('popstate'));assert.deepEqual(visibleView(),['overview']);
  assert.equal($$('.page-guide-button').length,6);
  const guide=$('#page-guide');
