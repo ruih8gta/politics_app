@@ -240,3 +240,10 @@ table th, table td { border-color: var(--line) !important; }
 }
 .leader-monogram svg { width: 62%; height: 62%; }
 .leader-monogram svg path { fill: none; stroke: var(--party); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.app-nav a:not(.active), [data-theme=dark] .app-nav a:not(.active) { background: transparent; border-color: var(--line); }
+.global-search input, .global-search input:focus { border: 0 !important; background: transparent !important; box-shadow: none; }
+.global-search button { border-left: 1.5px solid var(--line); border-radius: 0; color: var(--ink); }
+.app-nav a.active, .app-nav a.active:hover, [data-theme=dark] .app-nav a.active { background: var(--ink) !important; color: var(--paper) !important; border-color: var(--ink); }
+.map-heading p, #region-subtitle, .region-card p, .relation-bottom p, #relation-subtitle, .map-bottom > p { color: var(--muted); }
+.region-button, .select-leader-party, .card-link, .leader-source a, .link-button { color: var(--ink); }
+.directory-search input, .search-box input:focus { border: 0 !important; background: transparent !important; color: var(--ink); }
