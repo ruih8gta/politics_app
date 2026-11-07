@@ -1,4 +1,6 @@
-export const REPO='https://github.com/ruih8gta/politics_app/blob/3005fc5c9b30ebb922bd8c29c22ed019463d3e2d';
+export const REPO='https://github.com/ruih8gta/politics_app/blob/main';
+// 画面内で使う資料名と、リポジトリ内の収録ファイルの対応
+export const repoFiles={'politics.json':'snapshot.json','policies.json':'issues.json','prefectures.json':'election.json'};
 export const canonical={chudo:'center',sanseito:'sansei',komeito:'komei'};
 export const electionGroups={ldp:'自民',chudo:'中道',ishin:'維新',dpfp:'国民',sanseito:'参政',mirai:'みらい',jcp:'共産',reiwa:'れいわ',genyu:'減ゆ',hoshu:'保守',sdp:'社民',ind:'無所属'};
 export function electionMembers(election,id=0){return election.prefectures.filter(p=>!id||Number(p.code)===Number(id)).flatMap(p=>Object.entries(p.winners).flatMap(([key,n])=>Array.from({length:n},()=>({group:electionGroups[key]||key,pref:Number(p.code)}))));}

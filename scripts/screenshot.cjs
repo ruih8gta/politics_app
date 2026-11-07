@@ -9,13 +9,12 @@ const fs = require("node:fs");
 const ROOT = path.join(__dirname, "..");
 const OUT = path.join(ROOT, "docs", "screenshots");
 const PORT = 8790;
-const URL = `http://localhost:${PORT}/`;
+const BASE = `http://localhost:${PORT}/`;
 
 async function waitForServer() {
   for (let i = 0; i < 50; i++) {
     try {
-      const res = await fetch(URL);
-      if (res.ok) return;
+      if ((await fetch(BASE)).ok) return;
     } catch {}
     await new Promise((r) => setTimeout(r, 100));
   }
@@ -23,15 +22,22 @@ async function waitForServer() {
 }
 
 async function open(browser, opts) {
-  const page = await browser.newPage(opts);
+  const page = await browser.newPage({ ignoreHTTPSErrors: true, ...opts });
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
-  await page.goto(URL, { waitUntil: "networkidle" });
+  await page.goto(BASE, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForSelector(".pref");
-  if (errors.length) throw new Error(errors.join("\n"));
+  await page.waitForFunction(() => window.__unifiedReady === true);
+  page.assertNoErrors = () => {
+    if (errors.length) throw new Error(errors.join("\n"));
+  };
   return page;
+}
+
+async function go(page, route) {
+  await page.click(`.app-nav [data-route="${route}"]`);
+  await page.waitForTimeout(400);
 }
 
 (async () => {
@@ -41,30 +47,46 @@ async function open(browser, opts) {
     await waitForServer();
     const proxy = process.env.HTTPS_PROXY || process.env.https_proxy;
     const browser = await chromium.launch(proxy ? { proxy: { server: proxy, bypass: "localhost" } } : {});
+    const shot = (page, name, full = true) => page.screenshot({ path: path.join(OUT, name), fullPage: full });
 
-    // 全体（PC・スマホ）
-    const pc = await open(browser, { viewport: { width: 1200, height: 900 }, deviceScaleFactor: 1, ignoreHTTPSErrors: true });
-    await pc.screenshot({ path: path.join(OUT, "desktop.png"), fullPage: true });
-    const sp = await open(browser, { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, ignoreHTTPSErrors: true });
-    await sp.screenshot({ path: path.join(OUT, "mobile.png") });
+    // PC（明るい配色）
+    const pc = await open(browser, { viewport: { width: 1280, height: 900 }, colorScheme: "light" });
+    await shot(pc, "overview.png");
+    await go(pc, "map");
+    await pc.click('[data-map-dataset="election"]');
+    await pc.click('[data-pref="27"]'); // 2026衆院選で大阪を選んだ状態
+    await pc.mouse.move(0, 0);
+    await shot(pc, "map.png");
+    await go(pc, "policy");
+    await pc.click('[data-policy-page="issues"]');
+    await pc.click('[data-issue-select="energy"]');
+    await pc.mouse.move(0, 0);
+    await shot(pc, "issues.png");
+    await go(pc, "members");
+    await shot(pc, "members.png");
+    await go(pc, "leaders");
+    await shot(pc, "leaders.png");
+    await go(pc, "calendar");
+    await shot(pc, "calendar.png");
+    await go(pc, "overview");
+    await pc.click('[data-help-for="overview"]');
+    await pc.waitForTimeout(400);
+    await shot(pc, "guide.png", false);
+    pc.assertNoErrors();
 
-    // 各セクション（固定ヘッダーが重ならないよう、ヘッダーを隠してから撮る）
-    await pc.addStyleTag({ content: ".site-header{display:none}" });
-    await pc.setViewportSize({ width: 1200, height: 2400 });
-    await pc.waitForTimeout(300);
-    const shot = async (selector, name) => {
-      const el = await pc.$(selector);
-      await el.scrollIntoViewIfNeeded();
-      await el.screenshot({ path: path.join(OUT, name) });
-    };
-    await pc.click('.pref[data-code="27"]'); // 大阪を選んだ状態
-    await pc.mouse.move(0, 0);
-    await shot("section:has(#h-nation)", "nation.png");
-    await shot("#h-houses", "houses.png");
-    await shot("section:has(#h-agenda)", "agenda.png");
-    await pc.click("#tab-energy");
-    await pc.mouse.move(0, 0);
-    await shot("section:has(#h-issues)", "issues.png");
+    // ダークモード
+    const dark = await open(browser, { viewport: { width: 1280, height: 900 }, colorScheme: "dark" });
+    await shot(dark, "dark.png", false);
+    dark.assertNoErrors();
+
+    // スマホ
+    const sp = await open(browser, { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, colorScheme: "light" });
+    await shot(sp, "mobile.png", false);
+    await go(sp, "map");
+    await sp.evaluate(() => window.scrollTo(0, document.querySelector(".map-panel").getBoundingClientRect().top + window.scrollY - 70));
+    await sp.waitForTimeout(600);
+    await shot(sp, "mobile-map.png", false);
+    sp.assertNoErrors();
 
     await browser.close();
     console.log(`保存しました: ${path.relative(ROOT, OUT)}/`);

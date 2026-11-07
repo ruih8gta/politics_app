@@ -2,11 +2,11 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {districtMembers,roster,leadingGroup,policyRelation} from '../unified/model.js';
-import {electionMembers,houseForDiagram,pollSummary,isUpcoming} from '../unified/integration-model.js';
-import {layoutTerritories,validatePolicies,validatePrefectures} from '../unified/seat-layout.js';
+import {districtMembers,roster,leadingGroup,policyRelation} from '../js/model.js';
+import {electionMembers,houseForDiagram,pollSummary,isUpcoming} from '../js/integration-model.js';
+import {layoutTerritories,validatePolicies,validatePrefectures} from '../js/seat-layout.js';
 const root=resolve(import.meta.dirname,'..');
-const read=async name=>JSON.parse(await readFile(root+'/unified/'+name,'utf8'));
+const read=async name=>JSON.parse(await readFile(root+'/data/'+name,'utf8'));
 const data=await read('data.json'),election=await read('election.json'),snapshot=await read('snapshot.json'),issues=await read('issues.json'),policies=await read('policies.json'),leaders=await read('leadership.json');
 assert.equal(data.members.length,711);assert.equal(new Set(data.members.map(m=>m.id)).size,711);assert.equal(data.paths.length,47);
 for(const h of ['lower','upper']){const c=data.counts[h],members=data.members.filter(m=>m.house===h);assert.equal(members.length,c.total);for(const g of c.groups)assert.equal(members.filter(m=>m.group===g.short).length,g.count);const house=houseForDiagram(data,h);assert.equal(house.factions.reduce((s,f)=>s+f.seats,0),house.total);const layout=layoutTerritories(house,440,245,4),totalArea=layout.cells.reduce((s,c)=>s+c.w*c.h,0);for(const c of layout.cells)assert.ok(Math.abs(c.w*c.h/totalArea-c.seats/house.total)<1e-10,'Diagram area must represent seat count');}
@@ -19,13 +19,13 @@ assert.ok(Math.abs(pollSummary(snapshot.polls).average-47.3)<1e-9);const withHis
 console.log('PASS: 711 members, all caucus totals, exact diagram areas, 289 election winners, ties and uncertainty, distinct snapshots, 12 parties, 6 issues, 5 agenda items, latest-per-agency polling, month-precision calendar.');
 
 {
- const {parseHTML}=await import('linkedom');const {window,document}=parseHTML(await readFile(root+'/unified/index.html','utf8'));
+ const {parseHTML}=await import('linkedom');const {window,document}=parseHTML(await readFile(root+'/index.html','utf8'));
  const proto=Object.getPrototypeOf(document.querySelector('select')),getter=Object.getOwnPropertyDescriptor(proto,'value').get;Object.defineProperty(proto,'value',{get:getter,set(value){for(const o of this.querySelectorAll('option')){if(o.getAttribute('value')===String(value))o.setAttribute('selected','');else o.removeAttribute('selected');}}});
  let lastFocused=null;const originalFocus=window.HTMLElement.prototype.focus;window.HTMLElement.prototype.focus=function(){lastFocused=this;originalFocus?.call(this);};window.HTMLElement.prototype.showModal=function(){this.open=true;};window.HTMLElement.prototype.close=function(){this.open=false;this.dispatchEvent(new window.Event('close'));};
  const location={hash:''};window.location=location;window.history={pushState(_s,_t,url){location.hash=url;}};window.scrollTo=()=>{};window.matchMedia=()=>({matches:false});window.HTMLElement.prototype.scrollIntoView=()=>{};
  const storage=new Map();Object.assign(globalThis,{window,document,location,MouseEvent:window.Event,CustomEvent:window.CustomEvent,localStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)}});
  globalThis.fetch=async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))});const dialog=document.querySelector('dialog');dialog.showModal=()=>{dialog.open=true;};dialog.close=()=>{dialog.open=false;};
- const errors=[];const oldError=console.error;console.error=(...args)=>{errors.push(args.map(String).join(' '));oldError(...args);};await import(pathToFileURL(root+'/unified/unified.js'));console.error=oldError;assert.deepEqual(errors,[]);assert.equal(window.__unifiedReady,true);
+ const errors=[];const oldError=console.error;console.error=(...args)=>{errors.push(args.map(String).join(' '));oldError(...args);};await import(pathToFileURL(root+'/js/unified.js'));console.error=oldError;assert.deepEqual(errors,[]);assert.equal(window.__unifiedReady,true);
  const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],click=s=>{assert.ok($(s),'Missing target '+s);$(s).dispatchEvent(new window.Event('click',{bubbles:true}));},change=(s,v)=>{$(s).value=v;$(s).dispatchEvent(new window.Event('change',{bubbles:true}));},input=(s,v)=>{$(s).value=v;$(s).dispatchEvent(new window.Event('input',{bubbles:true}));},close=()=>click('#dialog-close');
  const visibleView=()=>$$('[data-view]').filter(v=>!v.hidden).map(v=>v.dataset.view);
  assert.deepEqual(visibleView(),['overview']);assert.equal($$('.kpi').length,4);assert.match($('#overview-kpis').textContent,/351/);assert.match($('#overview-kpis').textContent,/120/);assert.match($('#overview-kpis').textContent,/47.3/);assert.equal($$('.overview-pref').length,47);assert.equal($$('.house-diagram').length,2);
@@ -44,7 +44,7 @@ console.log('PASS: 711 members, all caucus totals, exact diagram areas, 289 elec
  click('[data-route="leaders"]');assert.equal($$('.leader-card').length,12);assert.equal($$('.cabinet-card').length,15);assert.match($('.cabinet-card.uncertain').textContent,/要確認/);click('#cabinet-sources');assert.match($('#dialog-content').textContent,/内閣/);close();
  click('[data-route="calendar"]');click('[data-calendar-filter="all"]');assert.equal($$('.calendar-event').length,snapshot.calendar.length);assert.ok($$('.calendar-event time').some(t=>t.dateTime==='2027-01'||t.getAttribute('datetime')==='2027-01'));click('#calendar-sources');assert.match($('#dialog-content').textContent,/個別出典URL/);close();
  click('#theme-toggle');assert.equal(document.documentElement.dataset.theme,'dark');click('#theme-toggle');assert.equal(document.documentElement.dataset.theme,'light');
- click('[data-open="sources"]');assert.match($('#dialog-content').textContent,/3005fc5/);assert.match($('#dialog-content').textContent,/福岡/);assert.match($('#dialog-content').textContent,/統合版は独立したディレクトリ/);close();
+ click('[data-open="sources"]');assert.match($('#dialog-content').textContent,/収録日2026.11.03/);assert.match($('#dialog-content').textContent,/福岡/);assert.match($('#dialog-content').textContent,/GitHubのリポジトリ/);close();
  location.hash='#overview';window.dispatchEvent(new window.Event('popstate'));assert.deepEqual(visibleView(),['overview']);
  assert.equal($$('.page-guide-button').length,6);
  const guide=$('#page-guide');
