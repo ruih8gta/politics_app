@@ -1,0 +1,215 @@
+/* ニッポン勢力図 ― 古地図・彩色テーマ
+   ベースのスタイル（styles.css / unified.css / page-guide.css）の後に読み込み、
+   色・紙の質感・線・書体を古地図風に置き換える。 */
+
+:root {
+  --bg: #e9d8b4;
+  --paper: #efe0bf;
+  --ink: #3b2a1a;
+  --muted: #7a6141;
+  --line: #8a6c45;
+  --line-strong: #5a3e22;
+  --soft: #e3cfa6;
+  --accent: #5a3e22;
+  --navy: #5a3e22;
+  --shu: #9e2a1f;
+  --vignette: rgba(90, 62, 34, .32);
+  --sea: #dcc9a0;
+  --serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --sans: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --tex: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .3  0 0 0 0 .12  0 0 0 .22 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+  font-family: var(--serif);
+  color: var(--ink);
+  background: var(--bg) var(--tex);
+}
+[data-theme=dark] {
+  --bg: #1d1812;
+  --paper: #2a2219;
+  --ink: #efe2c4;
+  --muted: #b9a47e;
+  --line: #7a5f3d;
+  --line-strong: #a3845a;
+  --soft: #362b1f;
+  --accent: #e3c89a;
+  --navy: #e3c89a;
+  --shu: #e0624f;
+  --vignette: rgba(0, 0, 0, .5);
+  --sea: #241d16;
+  --tex: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4'/><feColorMatrix values='0 0 0 0 .9  0 0 0 0 .75  0 0 0 0 .5  0 0 0 .07 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+  background: var(--bg) var(--tex);
+  color: var(--ink);
+}
+body, [data-theme=dark] body { background: var(--bg) var(--tex); color: var(--ink); }
+body, button, input, select, textarea { font-family: var(--serif); }
+
+/* ---------- ヘッダー ---------- */
+.app-header, [data-theme=dark] .app-header {
+  background: var(--bg) var(--tex);
+  border-bottom: 3px double var(--line-strong);
+}
+.app-header .brand { flex-direction: column; align-items: flex-start; gap: 0; }
+.app-header .brand .brand-name {
+  font: 900 26px/1.3 var(--serif); letter-spacing: .08em; color: var(--ink);
+  display: inline-flex; align-items: center;
+}
+.seal {
+  display: inline-grid; place-items: center; width: 1.45em; height: 1.45em; margin-left: .35em;
+  background: var(--shu); color: #fff; font: 900 .55em/1 var(--serif); font-style: normal;
+  border-radius: 3px; transform: rotate(-6deg);
+}
+.app-header .brand .brand-sub { font: 11px/1.6 var(--serif); letter-spacing: .08em; color: var(--muted); margin: 0; }
+.global-search, [data-theme=dark] .global-search {
+  background: var(--paper); border: 1.5px solid var(--line); border-radius: 0;
+}
+.global-search input { color: var(--ink); }
+.theme-button, .source-button { color: var(--ink); }
+
+.app-nav, [data-theme=dark] .app-nav {
+  background: var(--bg) var(--tex);
+  border-bottom: 1.5px solid var(--line);
+}
+.app-nav a { color: var(--ink); border-radius: 0; border: 1.5px solid transparent; }
+.app-nav a:hover { border-color: var(--line); text-decoration: none; background: transparent; }
+.app-nav a.active, [data-theme=dark] .app-nav a.active { background: var(--ink); color: var(--paper); }
+
+.data-banner, .data-banner button { color: var(--muted); }
+.data-banner .edition-dot { background: var(--shu); }
+
+/* ---------- 見出し ---------- */
+h1, h2, h3, .view-heading h1, .section-heading h2 { font-family: var(--serif); color: var(--ink); }
+.view-heading h1 { font-weight: 900; letter-spacing: .06em; }
+.eyebrow { color: var(--shu); letter-spacing: .2em; }
+.snapshot-pill { border: 1.5px solid var(--line); border-radius: 0; color: var(--muted); }
+
+/* ---------- 紙のパネル ---------- */
+.panel, .kpi, .agenda-card, .leader-card, .member-card, .cabinet-card, .region-card, .calendar-aside,
+.compare-picker, .issue-detail, .matrix-panel, dialog, .house-diagram,
+[data-theme=dark] .panel, [data-theme=dark] .kpi, [data-theme=dark] .agenda-card, [data-theme=dark] .leader-card,
+[data-theme=dark] .member-card, [data-theme=dark] .cabinet-card, [data-theme=dark] .region-card,
+[data-theme=dark] .calendar-aside, [data-theme=dark] .compare-picker, [data-theme=dark] dialog {
+  background: var(--paper) var(--tex);
+  border: 2px solid var(--line-strong);
+  border-radius: 0;
+  box-shadow: inset 0 0 40px var(--vignette);
+  color: var(--ink);
+}
+.house-diagram { box-shadow: none; border-width: 1.5px; }
+.member-card, .cabinet-card, .leader-card { border-width: 1.5px; box-shadow: inset 0 0 24px var(--vignette); }
+.card-link { color: var(--ink); border-top: 1.5px solid var(--line); }
+.card-link:hover { background: var(--soft); }
+.note, .context-note, .card-note, .section-heading p, .view-heading p { color: var(--muted); }
+
+/* ---------- ボタン・入力 ---------- */
+.primary-button, [data-theme=dark] .primary-button {
+  background: var(--ink); color: var(--paper); border-radius: 0; border: 1.5px solid var(--ink);
+}
+.subtle-button, .link-button, .page-guide-button, .icon-button {
+  color: var(--ink); border-color: var(--line); border-radius: 0;
+}
+.subtle-button { border: 1.5px solid var(--line); background: transparent; }
+select, input[type=search], .search-box input, .directory-search, .filter-toolbar select,
+[data-theme=dark] select, [data-theme=dark] .directory-search {
+  background: var(--paper); color: var(--ink); border: 1.5px solid var(--line); border-radius: 0;
+}
+.segmented, .house-switch, .policy-subnav { border-radius: 0; border-color: var(--line); background: transparent; }
+.segmented button, .house-switch button, .policy-subnav button, .issue-tabs button, .policy-tabs button {
+  border-radius: 0; color: var(--ink);
+}
+.segmented button.active, .house-switch button.active, .policy-subnav button.active,
+.issue-tabs button[aria-selected=true], .policy-tabs button.active,
+[data-theme=dark] .segmented button.active, [data-theme=dark] .issue-tabs button[aria-selected=true] {
+  background: var(--ink); color: var(--paper); border-color: var(--ink);
+}
+.issue-tabs button, .policy-tabs button, .issue-shortcuts button, .map-quick-links button {
+  border: 1.5px solid var(--line); background: transparent; border-radius: 0;
+}
+.issue-shortcuts button:hover { background: var(--soft); }
+
+/* ---------- 主要指標：朱印 ---------- */
+.kpi { min-height: 0; }
+.kpi:before { background: var(--shu); width: 4px; border-radius: 0; }
+.kpi-value { font-family: var(--serif); font-weight: 900; color: var(--ink); }
+.kpi-value .status-chip, .kpi .status-chip {
+  background: transparent; color: var(--shu); border: 2px solid var(--shu); border-radius: 3px;
+  font-weight: 900; transform: rotate(-4deg); display: inline-block;
+}
+.status-chip { border-radius: 0; }
+.status-chip.debate { background: var(--shu); color: #fff; }
+.status-chip.planned { background: var(--muted); color: var(--paper); }
+.status-chip.agreement { background: transparent; color: var(--shu); border: 1.5px solid var(--shu); }
+
+/* ---------- 地図・議席図 ---------- */
+.overview-map-stage, .map-stage, [data-theme=dark] .map-stage, [data-theme=dark] .overview-map-stage {
+  background: var(--sea) var(--tex);
+  box-shadow: inset 0 0 50px var(--vignette);
+}
+#atlas-grid path { stroke: var(--line); opacity: .25; }
+.sea-label, .island-caption { fill: var(--muted); font-family: var(--serif); letter-spacing: .4em; }
+.prefecture, .overview-pref { stroke: var(--line-strong); stroke-width: .7; }
+.prefecture:hover, .overview-pref:hover { stroke: var(--ink); stroke-width: 1.6; }
+#map-paths, .overview-map-stage svg > g, .house-diagram svg, .territory-wash { filter: url(#washi); }
+.house-diagram svg rect { stroke: var(--line-strong); }
+.house-diagram .diagram-label, .house-diagram .diagram-seats {
+  fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; font-family: var(--serif); font-weight: 900;
+}
+.map-mark circle { stroke: var(--paper); stroke-width: 1.5; }
+.region-card h3, .region-card h3 * { font-family: var(--serif); }
+
+/* ---------- 家紋風の印 ---------- */
+.emblem {
+  background: var(--paper) !important;
+  border: 2px solid var(--party) !important;
+  border-radius: 50%;
+  color: var(--party);
+}
+.emblem svg path { stroke: var(--party) !important; fill: none; }
+
+/* ---------- 支持率・日程 ---------- */
+.poll-track { background: var(--soft); border: 1px solid var(--line); border-radius: 0; }
+.poll-track .approve { background: #4f7a34; }
+.poll-track .disapprove { background: var(--shu); }
+[data-theme=dark] .poll-track .approve { background: #9cc37a; }
+.timeline-mini > div:before { background: var(--paper); border-color: var(--line-strong); }
+.calendar-event time, .timeline-mini time { color: var(--shu); font-family: var(--serif); }
+
+/* ---------- 表 ---------- */
+table th, table td { border-color: var(--line) !important; }
+.comparison-table th, .comparison-table td, [data-theme=dark] .comparison-table th, [data-theme=dark] .comparison-table td {
+  background: transparent; color: var(--ink);
+}
+
+/* ---------- フッター ---------- */
+.unified-footer { border-top: 3px double var(--line-strong); color: var(--muted); }
+.unified-footer strong { font: 900 18px var(--serif); letter-spacing: .08em; color: var(--ink); }
+
+/* ---------- 解説パネル ---------- */
+.guide-drawer, [data-theme=dark] .guide-drawer { background: var(--paper) var(--tex); color: var(--ink); border-left: 3px double var(--line-strong); }
+.knowledge-card { background: transparent; border: 1.5px solid var(--line); border-radius: 0; }
+.overview-map-stage svg text { fill: var(--muted); font-family: var(--serif); }
+
+/* ---------- 白い面を紙色に ---------- */
+.map-heading, .detail-top, .compare-picker, .directory-search, .member-filter-row select, select,
+#dialog-content .evidence-card, .comparison-table th:first-child, .house-switch, .region-stack,
+.leader-image, .member-initial, .subtle-button, dialog, .region-card,
+[data-theme=dark] .map-heading, [data-theme=dark] .detail-top, [data-theme=dark] .region-stack,
+[data-theme=dark] .member-initial, [data-theme=dark] .subtle-button, [data-theme=dark] #dialog-content .evidence-card {
+  background-color: var(--paper);
+  background-image: var(--tex);
+  color: var(--ink);
+}
+.map-heading, .detail-top { border-bottom: 1.5px solid var(--line); }
+.detail-top { background-image: linear-gradient(var(--tint), var(--tint)), var(--tex); }
+.house-switch button.active, [data-theme=dark] .house-switch button.active { background: var(--ink); color: var(--paper); }
+.policy-tabs button.active, nav a:hover { background: var(--soft); }
+.cabinet-card.uncertain, [data-theme=dark] .cabinet-card.uncertain { background-color: var(--soft); border-color: var(--shu); }
+.progress-steps > span { border-radius: 0; background: var(--soft); color: var(--muted); }
+.progress-steps > span.complete { background: color-mix(in srgb, var(--line) 35%, var(--paper)); color: var(--ink); }
+.progress-steps > span.current { background: var(--shu); color: #fff; }
+.status-chip.uncertain { background: transparent; color: var(--shu); border: 1.5px dashed var(--shu); }
+#error { background: var(--paper); border: 2px solid var(--shu); }
+.map-explainer p, .map-explainer h3 { color: var(--ink); }
+.map-explainer p { color: var(--muted); }
+.faction-row.active, [data-theme=dark] .faction-row.active { background: var(--soft); }
+.faction-row-name small, .faction-count small, .sidebar-foot, .leader-source, .detail-stat-note, .detail-note { color: var(--muted); }
+.relation-node text { font-family: var(--serif); }
+.toast { background: var(--ink); color: var(--paper); border-radius: 0; }
