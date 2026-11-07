@@ -1,16 +1,13 @@
 {
-  "name": "politics-app",
-  "version": "0.3.0",
+  "name": "nippon-seiryokuzu",
+  "version": "1.0.0",
   "private": true,
-  "description": "日本の政治情勢が一目でわかる勢力図ダッシュボード",
+  "description": "ニッポン勢力図：日本の政治情勢を古地図風の勢力図で見渡すWebアプリ",
   "type": "module",
   "scripts": {
     "start": "python3 -m http.server 8000",
-    "test": "npm run test:legacy && npm run test:unified",
-    "screenshot": "node scripts/screenshot.cjs",
-    "test:legacy": "node scripts/validate.mjs",
-    "test:unified": "node --check unified/app.js && node --check unified/model.js && node --check unified/unified.js && node --check unified/integration-model.js && node --check unified/page-guide.js && node --check unified/guide-content.js && node scripts/verify-unified.mjs",
-    "start:unified": "python3 -m http.server 8000 --directory unified"
+    "test": "node --check js/app.js && node --check js/model.js && node --check js/unified.js && node --check js/integration-model.js && node --check js/page-guide.js && node --check js/guide-content.js && node --check js/seat-layout.js && node scripts/verify.mjs",
+    "screenshot": "node scripts/screenshot.cjs"
   },
   "devDependencies": {
     "linkedom": "0.18.15"
