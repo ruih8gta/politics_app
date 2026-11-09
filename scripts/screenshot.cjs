@@ -51,6 +51,8 @@ async function go(page, route) {
 
     // PC（明るい配色）
     const pc = await open(browser, { viewport: { width: 1280, height: 900 }, colorScheme: "light" });
+    await pc.selectOption("#my-region", "27"); // 「わたしの地域」に大阪府を選んだ状態
+    await pc.waitForTimeout(300);
     await shot(pc, "overview.png");
     await go(pc, "map");
     await pc.click('[data-map-dataset="election"]');

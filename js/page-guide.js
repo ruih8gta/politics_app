@@ -23,7 +23,7 @@ export function initPageGuides({ getPolicyPage = () => 'agenda' } = {}) {
     drawer.dataset.page = page;
     drawer.querySelector('#page-guide-content').innerHTML = `
       <div class="guide-header">
-        <div><span class="eyebrow">POLITICS NOTE / ${esc(guide.label)}</span>
+        <div><span class="eyebrow">政治の基礎知識・${esc(guide.label)}</span>
         <h2 id="page-guide-title" tabindex="-1">${esc(guide.title)}</h2>
         <p>${esc(guide.intro)}</p></div>
         <button class="guide-close" data-close-page-guide aria-label="解説を閉じる">×</button>

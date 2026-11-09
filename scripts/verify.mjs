@@ -14,9 +14,14 @@ assert.deepEqual(districtMembers(data,'upper',31).map(m=>m.id),districtMembers(d
 const base={house:'upper',memberPref:1,memberType:'district',memberGroup:'all',query:'アンノタカヒロ'};assert.equal(roster(data,base)[0].name,'安野 貴博');assert.equal(roster(data,{...base,query:'',memberType:'proportional'}).length,100);
 assert.deepEqual(validatePolicies(issues,snapshot.parties),[]);assert.deepEqual(validatePrefectures(election,snapshot.parties),[]);assert.equal(electionMembers(election).length,289);
 for(const id of [30,37,45])assert.equal(leadingGroup(electionMembers(election,id)),'同数最多');assert.ok(election.prefectures.find(p=>Number(p.code)===40).uncertain);assert.ok(election.prefectures.find(p=>Number(p.code)===28).note);
-assert.equal(policyRelation('mirai','ldp','energy'),null);assert.equal(policies.length,12);assert.equal(leaders.parties.length,12);assert.equal(issues.issues.length,6);assert.equal(issues.agenda.length,5);
+assert.equal(policyRelation('mirai','ldp','energy'),null);assert.equal(policies.length,12);assert.equal(leaders.parties.length,12);assert.equal(issues.issues.length,10);assert.equal(issues.agenda.length,5);
 assert.ok(Math.abs(pollSummary(snapshot.polls).average-47.3)<1e-9);const withHistory=pollSummary([...snapshot.polls,{pollster:'NHK',date:'2020-01-01',approve:1}]);assert.equal(withHistory.rows.length,3);assert.ok(Math.abs(withHistory.average-47.3)<1e-9);assert.equal(isUpcoming({date:'2027-01'},'2027-01-25'),true);assert.equal(isUpcoming({date:'2026-10-05'},'2026-11-06'),false);
-console.log('PASS: 711 members, all caucus totals, exact diagram areas, 289 election winners, ties and uncertainty, distinct snapshots, 12 parties, 6 issues, 5 agenda items, latest-per-agency polling, month-precision calendar.');
+const pollHistory=await read('poll-history.json'),changes=await read('changes.json');
+for(const sr of pollHistory.series){assert.ok(sr.sources.length>0,'Poll series needs sources');const ms=sr.points.map(x=>x.month);assert.deepEqual(ms,[...ms].sort(),'Poll points must be in month order');assert.equal(new Set(ms).size,ms.length);for(const pt of sr.points){assert.match(pt.month,/^\d{4}-\d{2}$/);assert.ok(pt.approve>0&&pt.approve<100);assert.ok(pt.disapprove==null||pt.approve+pt.disapprove<=100);}}
+assert.deepEqual(changes.items.map(c=>c.date),changes.items.map(c=>c.date).sort().reverse(),'Changes must be newest first');for(const c of changes.items){assert.match(c.date,/^\d{4}-\d{2}-\d{2}$/);assert.ok(c.text);}
+for(const a of issues.agenda.filter(a=>a.bill)){assert.equal(a.bill.stages.length,5);assert.ok(a.bill.current>=-1&&a.bill.current<5);assert.ok(a.bill.note);}
+{const {proportionalMembers}=await import('../js/model.js');assert.equal(proportionalMembers(data).length,data.members.filter(m=>m.house==='lower'&&m.proportional).length);assert.deepEqual(proportionalMembers(data,27).map(m=>m.id),proportionalMembers(data,28).map(m=>m.id),'Same PR block shares members');assert.ok(proportionalMembers(data,13).every(m=>m.district==='（比）東京'));}
+console.log('PASS: 711 members, all caucus totals, exact diagram areas, 289 election winners, ties and uncertainty, distinct snapshots, 12 parties, 10 issues, 5 agenda items, latest-per-agency polling, month-precision calendar.');
 
 {
  const {parseHTML}=await import('linkedom');const {window,document}=parseHTML(await readFile(root+'/index.html','utf8'));
@@ -61,5 +66,20 @@ console.log('PASS: 711 members, all caucus totals, exact diagram areas, 289 elec
  console.log('PASS: contextual guides on all six pages, policy subviews, labelled dialog, initial focus and focus restoration, dismiss buttons, Escape/cancel, backdrop, navigation cleanup, search-state preservation, official reference links.');
  assert.equal($$('a[target="_blank"]').filter(a=>!a.rel.includes('noopener')).length,0);for(const el of $$('select,input'))assert.ok(el.getAttribute('aria-label')||$(`label[for="${el.id}"]`)||el.closest('label'),'Form field must have label');
  const ids=$$('[id]').map(x=>x.id);assert.equal(ids.length,new Set(ids).size,'DOM IDs must remain unique');
+ click('[data-route="overview"]');
+ assert.equal($$('#overview-summary .summary-lines li').length,3);assert.match($('#overview-summary').textContent,/高市早苗/);assert.match($('#overview-summary').textContent,/3分の2を超える/);assert.match($('#overview-summary').textContent,/過半数まであと5議席/);
+ click('#overview-summary .term');assert.equal($$('.term-tip').length,1);assert.equal($('#overview-summary .term').getAttribute('aria-expanded'),'true');click('#overview-summary .term');assert.equal($$('.term-tip').length,0);
+ assert.equal($$('#overview-changes .change-list li').length,5);click('[data-change-link="agenda:food-tax"]');assert.equal(dialog.open,true);assert.match($('#dialog-content').textContent,/消費税/);close();
+ assert.equal($$('#overview-bills .bill-row').length,2);assert.equal($$('#overview-bills .bill-steps .current').length,2);assert.match($('#overview-bills').textContent,/提出前/);
+ assert.equal($$('#overview-trend polyline').length,2);assert.match($('#overview-trend svg').getAttribute('aria-label'),/NHK/);click('#trend-sources');assert.match($('#dialog-content').textContent,/前月比から算出/);assert.ok($$('#dialog-content a').length>=6);close();
+ assert.match($('#overview-kpis').textContent,/3分の2は310議席/);assert.match($('#overview-kpis').textContent,/過半数は125議席/);
+ assert.equal($$('#my-region option').length,48);assert.match($('#overview-myregion').textContent,/都道府県を選ぶ/);change('#my-region','27');assert.match($('#overview-myregion').textContent,/大阪府のいま/);assert.match($('#overview-myregion').textContent,/維新 18・自民 1/);assert.equal(storage.get('seiryokuzu-pref'),'27');assert.equal($$('.overview-pref.mine').length,1);
+ click('#overview-myregion [data-region-link="27"]');assert.deepEqual(visibleView(),['map']);assert.equal($('#region-name').textContent,'大阪府');
+ click('[data-house="lower"]');click('[data-map-dataset="current"]');assert.ok($$('.prefecture').some(x=>String(x.style.fill).includes('url(#m-stripe-')),'Mixed prefectures are striped');assert.ok($$('#map-svg pattern').length>0);
+ click('[data-map-dataset="pr"]');assert.match($('#region-subtitle').textContent,/比例 近畿ブロック 28人/);assert.match($('#map-data-date').textContent,/比例ブロック/);assert.equal($('#region-data-note').hidden,false);click('[data-map-dataset="current"]');assert.equal($('#region-data-note').hidden,true);
+ click('[data-policy-page="issues"]');assert.equal($$('#issue-tabs button').length,10);click('[data-issue-select="political-funds"]');assert.equal($$('.spectrum-group').length,3);assert.equal($$('#issue-matrix thead th').length,11);
+ click('[data-policy-page="agenda"]');assert.equal($$('#agenda-grid .bill-steps').length,2);
+ change('#my-region','');assert.match($('#overview-myregion').textContent,/都道府県を選ぶ/);
+ console.log('PASS: three-line summary, glossary, recent changes, bill stages, poll trend with sources, my-region memory, striped map, PR-block map, ten issues.');
  console.log('PASS: all six views, region/member navigation, historical election mode, tie/uncertainty notes, upper-house switching, cross-house search, dialogs, policy filters, progress/source distinctions, issue keyboard controls, comparison limit, relations, polls, cabinet notes, calendar precision, theme, history, accessible forms.');
 }
