@@ -1,0 +1,133 @@
+/* 追加要素と、読みやすさの調整（theme.css の後に読み込む） */
+
+:root {
+  --muted: #5f4a2f;           /* 補足の文字を濃く */
+  --trend-a: #3f6b2a;
+  --trend-b: #2f5f95;
+  --trend-c: #8e3b62;
+}
+[data-theme=dark] {
+  --muted: #cbb892;
+  --trend-a: #a9d18a;
+  --trend-b: #8fb8e6;
+  --trend-c: #e3a0c0;
+}
+
+/* ---------- 文字を大きく ---------- */
+body { font-size: 15px; }
+.eyebrow, .view-heading .eyebrow { font-size: 12px; letter-spacing: .12em; font-weight: 700; }
+.kpi-label { font-size: 13px; }
+.kpi-sub { font-size: 12.5px; color: var(--muted); }
+.note, .context-note, .card-note, .section-heading p, .view-heading p, .data-banner, .data-banner small, .data-banner button,
+.sidebar-foot, .leader-source, .detail-note, .detail-stat-note, .map-bottom > p, .legend-item, .map-legend,
+.faction-row-name small, .faction-count small, .snapshot-pill, .poll-legend, .house-diagram > p, .house-diagram h3 small,
+.timeline-mini p, .overview-agenda-item p, .agenda-meta, .region-card p, .region-legend, #relation-subtitle, .relation-bottom p,
+.map-explainer p, .map-explainer #overview-map-legend, .map-explainer .legend-title, .policy-footer, .member-card small,
+.cabinet-card .post, .cabinet-card .warn, .issue-position p, .calendar-event p, .unified-footer p, .unified-footer small, .map-context > span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.app-nav a, .subtle-button, .primary-button, .link-button, .card-link, button, input, select { font-size: 14px; }
+.status-chip, .issue-shortcuts button, .map-quick-links button, .map-quick-links a, .party-tag { font-size: 13px; }
+.overview-agenda-item h3, .timeline-mini h3 { font-size: 16px; }
+.agenda-card > p, .issue-position h3 { font-size: 15px; }
+.theme-button span { font-size: 13px; }
+.map-label { font-size: 13px; }
+
+/* ---------- わたしの地域（ヘッダー） ---------- */
+.my-region { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); white-space: nowrap; }
+.my-region select { padding: 7px 8px; max-width: 10em; }
+
+/* ---------- 概要：追加のパネル ---------- */
+.overview-lead { display: grid; grid-template-columns: 1.15fr 1fr; gap: 14px; margin-bottom: 14px; }
+.overview-extra { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 14px; margin: 22px 0; }
+.extra-panel { padding: 20px 22px; min-width: 0; }
+.extra-panel h2 { font-size: 19px; margin: 0 0 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.extra-panel h2 small { font: 400 13px var(--serif); color: var(--muted); }
+.card-note.plain { padding: 0; margin: 10px 0 0; }
+.extra-panel .card-link { margin: 12px -22px -20px; width: calc(100% + 44px); }
+
+.summary-lines { margin: 0; padding-left: 1.5em; font-size: 17px; line-height: 2.1; }
+.summary-lines b { background: linear-gradient(transparent 62%, color-mix(in srgb, #e9c46a 55%, transparent) 62%); }
+.summary-lines rt { font-size: .5em; color: var(--muted); }
+
+.term { font: inherit; padding: 0; color: inherit; border-bottom: 1.5px dotted var(--shu); cursor: help; }
+.term-tip {
+  display: block; margin: 4px 0 6px; padding: 6px 10px; font-size: 13px; line-height: 1.7; font-weight: 400;
+  background: var(--ink); color: var(--paper); max-width: 34em;
+}
+.term-tip b { background: none !important; color: inherit; }
+
+.change-list { list-style: none; margin: 0; padding: 0; }
+.change-list li { display: flex; gap: 12px; align-items: baseline; border-bottom: 1px solid var(--line); padding: 7px 0; }
+.change-list li:last-child { border-bottom: 0; }
+.change-list time { color: var(--shu); font-weight: 700; font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.change-link { text-align: left; font-size: 14.5px; line-height: 1.6; color: var(--ink); padding: 0; }
+.change-link:hover { text-decoration: underline; }
+
+.bill-row { border-bottom: 1px solid var(--line); padding: 8px 0 10px; }
+.bill-row:last-of-type { border-bottom: 0; }
+.bill-row p { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+.bill-title { font: 700 15.5px var(--serif); color: var(--ink); padding: 0; text-align: left; }
+.bill-steps { display: flex; margin: 8px 0 4px; }
+.bill-steps span {
+  flex: 1; text-align: center; font-size: 12px; padding: 5px 2px; white-space: nowrap;
+  background: var(--soft); border: 1px solid var(--line); margin-right: -1px; color: var(--muted);
+}
+.bill-steps .complete { background: color-mix(in srgb, var(--line) 40%, var(--paper)); color: var(--ink); }
+.bill-steps .current { background: var(--shu); color: #fff; font-weight: 900; border-color: var(--shu); }
+.agenda-card .bill-steps { margin: 4px 0 14px; }
+
+.trend-chart { width: 100%; height: auto; display: block; }
+.trend-grid { stroke: var(--line); stroke-width: .7; opacity: .7; }
+.trend-axis { fill: var(--muted); font: 12px var(--serif); }
+.trend-event { stroke: var(--shu); stroke-width: 1; stroke-dasharray: 4 3; }
+.trend-event-label { fill: var(--shu); font: 11.5px var(--serif); }
+.trend-end { font: 700 13px var(--serif); }
+
+.myregion { margin: 0; display: grid; gap: 8px; }
+.myregion > div { border-left: 4px solid var(--shu); padding: 1px 12px; }
+.myregion dt { font-size: 13px; color: var(--muted); }
+.myregion dd { margin: 0; font: 900 18px var(--serif); }
+.myregion dd small { font: 400 13px var(--serif); color: var(--muted); margin-left: 6px; }
+.myregion-empty { font-size: 14.5px; color: var(--muted); margin: 0; }
+.overview-pref.mine { stroke: var(--shu); stroke-width: 3; }
+
+.nav-icon, .nav-short { display: none; }
+
+@media (max-width: 1100px) {
+  .overview-extra { grid-template-columns: 1fr 1fr; }
+  .overview-extra #overview-trend { grid-column: 1 / -1; grid-row: 1; }
+}
+
+/* ---------- スマホ：下に固定するナビ ---------- */
+@media (max-width: 760px) {
+  .overview-lead, .overview-extra { grid-template-columns: 1fr; }
+  .summary-lines { font-size: 15.5px; line-height: 2; }
+  .my-region span { display: none; }
+
+  body { padding-bottom: calc(62px + env(safe-area-inset-bottom, 0px)); }
+  .app-nav, [data-theme=dark] .app-nav {
+    position: fixed; top: auto; bottom: 0; left: 0; right: 0; z-index: 40;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 0;
+    padding: 0 0 env(safe-area-inset-bottom, 0px); margin: 0; overflow: visible;
+    border-top: 2px solid var(--line-strong); border-bottom: 0;
+    -webkit-mask-image: none; mask-image: none;
+    background: var(--paper) var(--tex);
+  }
+  .app-nav a, .app-nav a:not(.active), [data-theme=dark] .app-nav a:not(.active) {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+    min-height: 58px; padding: 6px 0; border: 0; border-radius: 0; font-size: 11.5px; white-space: nowrap;
+  }
+  .app-nav .nav-full { display: none; }
+  .app-nav .nav-icon { display: block; font-style: normal; font-size: 19px; line-height: 1.1; }
+  .app-nav .nav-short { display: block; }
+  .toast { bottom: 76px; }
+}
+
+/* ---------- 残っていた小さな文字 ---------- */
+.eyebrow, .map-heading .eyebrow, .section-heading .eyebrow, .panel-heading .eyebrow { font-size: 12px !important; }
+#snapshot-label, .chamber-summary span, .chamber-summary, .region-data-note, .detail-top p { font-size: 13px !important; color: var(--muted); }
+.sea-label { font-size: 15px; letter-spacing: .5em; opacity: .7; }
+.island-caption { font-size: 12px; }
+.region-legend b { font-size: 13px; }

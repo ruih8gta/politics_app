@@ -1,0 +1,150 @@
+{
+  "updatedAt": "2026-11-09",
+  "note": "各社の月例調査の内閣支持率。調査の方法が違うため、機関どうしの数値は直接比べられません。「算出」は、翌月の報道にある前月比から計算した値です。",
+  "events": [
+    {
+      "date": "2026-02",
+      "label": "衆院選・第2次内閣"
+    },
+    {
+      "date": "2026-09",
+      "label": "内閣改造"
+    }
+  ],
+  "series": [
+    {
+      "pollster": "NHK",
+      "points": [
+        {
+          "month": "2026-04",
+          "approve": 61,
+          "disapprove": 22
+        },
+        {
+          "month": "2026-05",
+          "approve": 61,
+          "disapprove": 23
+        },
+        {
+          "month": "2026-06",
+          "approve": 60,
+          "disapprove": null,
+          "derived": true
+        },
+        {
+          "month": "2026-07",
+          "approve": 58,
+          "disapprove": 27
+        },
+        {
+          "month": "2026-08",
+          "approve": 53,
+          "disapprove": 33
+        },
+        {
+          "month": "2026-09",
+          "approve": 53,
+          "disapprove": 31
+        },
+        {
+          "month": "2026-10",
+          "approve": 51,
+          "disapprove": 32
+        },
+        {
+          "month": "2026-11",
+          "approve": 53,
+          "disapprove": 32
+        }
+      ],
+      "sources": [
+        {
+          "label": "NHK: 高市内閣支持率53% 不支持32%（11月）",
+          "url": "https://news.web.nhk/newsweb/na/nd-20261109de72711"
+        },
+        {
+          "label": "NHK: 支持率51% 不支持32%（10月）",
+          "url": "https://news.web.nhk/newsweb/na/nd-20261013de58348"
+        },
+        {
+          "label": "NHK: 支持率53% 不支持31%（9月）",
+          "url": "https://news.web.nhk/newsweb/na/nd-20260914de50073"
+        },
+        {
+          "label": "NHK: 支持率58% 不支持27%（7月）",
+          "url": "https://news.web.nhk/newsweb/na/na-k10015175451000"
+        },
+        {
+          "label": "NHK: 支持率61% 不支持23%（5月）",
+          "url": "https://news.web.nhk/newsweb/na/na-k10015118371000"
+        }
+      ]
+    },
+    {
+      "pollster": "時事通信",
+      "points": [
+        {
+          "month": "2026-03",
+          "approve": 59.3,
+          "disapprove": null
+        },
+        {
+          "month": "2026-04",
+          "approve": 59.1,
+          "disapprove": null
+        },
+        {
+          "month": "2026-05",
+          "approve": 59.4,
+          "disapprove": null,
+          "derived": true
+        },
+        {
+          "month": "2026-06",
+          "approve": 54.3,
+          "disapprove": 22.2
+        },
+        {
+          "month": "2026-07",
+          "approve": 49.0,
+          "disapprove": null,
+          "derived": true
+        },
+        {
+          "month": "2026-08",
+          "approve": 48.4,
+          "disapprove": null
+        },
+        {
+          "month": "2026-09",
+          "approve": 44.1,
+          "disapprove": null,
+          "derived": true
+        },
+        {
+          "month": "2026-10",
+          "approve": 42.4,
+          "disapprove": 29.7
+        }
+      ],
+      "sources": [
+        {
+          "label": "時事: 内閣支持率の推移",
+          "url": "https://www.jiji.com/jc/tokushu?id=naikaku_shijiritsu&g=pol"
+        },
+        {
+          "label": "時事: 内閣支持率42%に下落（10月）",
+          "url": "https://www.jiji.com/jc/article?k=2026101500705&g=pol"
+        },
+        {
+          "label": "時事: 内閣支持横ばい48.4%（8月）",
+          "url": "https://www.jiji.com/jc/article?k=2026081300707&g=pol"
+        },
+        {
+          "label": "時事: 高市内閣支持、微減59.1%（4月）",
+          "url": "https://www.jiji.com/jc/article?k=2026041600758&g=pol"
+        }
+      ]
+    }
+  ]
+}

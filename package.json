@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "python3 -m http.server 8000",
-    "test": "node --check js/app.js && node --check js/model.js && node --check js/unified.js && node --check js/integration-model.js && node --check js/page-guide.js && node --check js/guide-content.js && node --check js/seat-layout.js && node scripts/verify.mjs",
+    "test": "node --check js/app.js && node --check js/model.js && node --check js/unified.js && node --check js/integration-model.js && node --check js/page-guide.js && node --check js/guide-content.js && node --check js/seat-layout.js && node --check js/extras.js && node --check js/stripes.js && node scripts/verify.mjs",
     "screenshot": "node scripts/screenshot.cjs"
   },
   "devDependencies": {
